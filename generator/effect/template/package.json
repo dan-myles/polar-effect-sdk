@@ -29,11 +29,11 @@
     "test": "vitest run"
   },
   "peerDependencies": {
-    "effect": "^4.0.0-rc.114"
+    "effect": "^4.0.0-rc.117"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "effect": "4.0.0-rc.114",
+    "effect": "4.0.0-rc.117",
     "oxfmt": "^0.56.0",
     "oxlint": "^1.71.0",
     "tsdown": "^0.22.3",

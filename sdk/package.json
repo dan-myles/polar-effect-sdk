@@ -1,6 +1,6 @@
 {
   "name": "polar-effect",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Unofficial Effect SDK for the Polar API",
   "keywords": [
     "api",
@@ -63,7 +63,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "effect": "4.0.0-rc.114",
+    "effect": "4.0.0-rc.117",
     "oxfmt": "^0.56.0",
     "oxlint": "^1.71.0",
     "tsdown": "^0.22.3",
@@ -71,7 +71,7 @@
     "vitest": "^4.1.9"
   },
   "peerDependencies": {
-    "effect": "^4.0.0-rc.114"
+    "effect": "^4.0.0-rc.117"
   },
   "engines": {
     "node": ">=22"

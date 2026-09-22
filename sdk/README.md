@@ -7,7 +7,7 @@ Generated from Polar's OpenAPI specification with an Effect emitter for Polar's 
 ## Install
 
 ```sh
-npm install polar-effect effect@4.0.0-rc.114
+npm install polar-effect effect@4.0.0-rc.117
 ```
 
 ## Usage

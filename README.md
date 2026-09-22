@@ -11,7 +11,7 @@ Unofficial [Effect](https://effect.website) SDK for the [Polar](https://polar.sh
 - Forward compatible: new enum values, union variants and webhook event types decode instead of failing
 
 ```sh
-npm install polar-effect effect@4.0.0-rc.114
+npm install polar-effect effect@4.0.0-rc.117
 ```
 
 ```ts
