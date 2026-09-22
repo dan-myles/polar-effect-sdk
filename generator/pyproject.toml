@@ -1,0 +1,27 @@
+[project]
+name = "polar-effect-generator"
+version = "0.1.0"
+description = "Generates the polar-effect SDK from Polar's OpenAPI spec"
+requires-python = ">=3.14"
+dependencies = [
+    "jinja2>=3.1.6",
+    "oas-patch==0.6.0",
+    "openapi-pydantic>=0.5.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.3",
+    "ruff>=0.15.16",
+    "ty>=0.0.44",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [".", "../upstream/sdk/generator"]
+testpaths = ["tests"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["effect", "generator"]
+
+[tool.ty.environment]
+extra-paths = ["../upstream/sdk/generator"]

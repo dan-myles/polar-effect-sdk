@@ -1,0 +1,57 @@
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Update upstream to latest main
+        run: |
+          git submodule update --init --depth 1 --filter=blob:none upstream
+          git -C upstream sparse-checkout set sdk/generator docs/openapi
+          git -C upstream fetch --depth 1 origin main
+          git -C upstream checkout --detach FETCH_HEAD
+          echo "UPSTREAM_SHA=$(git -C upstream rev-parse --short HEAD)" >> "$GITHUB_ENV"
+
+      - uses: astral-sh/setup-uv@v6
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+
+      - name: Install pnpm
+        run: npm install --global pnpm@11.13.1
+
+      - name: Regenerate SDK
+        working-directory: generator
+        run: |
+          uv sync --frozen
+          uv run python cli.py
+
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "No changes."
+            exit 0
+          fi
+          branch="sync-upstream-$UPSTREAM_SHA"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add -A
+          git commit -m "chore: sync upstream polarsource/polar@$UPSTREAM_SHA"
+          git push --force origin "$branch"
+          gh pr create --fill --head "$branch" || echo "Pull request already exists."
