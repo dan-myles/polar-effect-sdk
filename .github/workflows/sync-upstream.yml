@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7.0.1
 
       - name: Update upstream to latest main
         run: |
@@ -24,9 +24,9 @@ jobs:
           git -C upstream checkout --detach FETCH_HEAD
           echo "UPSTREAM_SHA=$(git -C upstream rev-parse --short HEAD)" >> "$GITHUB_ENV"
 
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@v10.1.0
 
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7.0.0
         with:
           node-version: "24"
 
