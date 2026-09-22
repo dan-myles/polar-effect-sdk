@@ -2,9 +2,18 @@
 
 import argparse
 import json
+import os
 import pathlib
 import shutil
 import sys
+
+# Upstream's IR builder iterates sets in places, so output depends on hash randomization.
+if os.environ.get("PYTHONHASHSEED") != "0":
+    os.execve(
+        sys.executable,
+        [sys.executable, *sys.argv],
+        {**os.environ, "PYTHONHASHSEED": "0"},
+    )
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(1, str(ROOT / "upstream" / "sdk" / "generator"))
