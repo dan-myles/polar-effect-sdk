@@ -44,6 +44,10 @@ jobs:
         working-directory: sdk
         run: |
           version="$(node -p 'require("./package.json").version')"
+          if npm view "polar-effect@$version" version >/dev/null 2>&1; then
+            echo "polar-effect@$version is already published, skipping."
+            exit 0
+          fi
           tag=latest
           case "$version" in *-*) tag=next ;; esac
           npm publish --provenance --access public --tag "$tag"
