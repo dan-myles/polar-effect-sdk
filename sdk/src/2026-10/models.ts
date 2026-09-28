@@ -2617,6 +2617,16 @@ export class AuthorizeResponseUser extends Schema.Opaque<AuthorizeResponseUser>(
 ) {}
 
 /**
+ * BadRequest
+ */
+export class BadRequest extends Schema.Opaque<BadRequest>()(
+  Schema.Struct({
+    error: Schema.Literal("BadRequest"),
+    detail: Schema.String,
+  }),
+) {}
+
+/**
  * BalanceCreditOrderMetadata
  */
 export class BalanceCreditOrderMetadata extends Schema.Opaque<BalanceCreditOrderMetadata>()(
@@ -3051,7 +3061,6 @@ export class BenefitDiscordProperties extends Schema.Opaque<BenefitDiscordProper
     role_id: Schema.String,
     /** Whether to kick the member from the Discord server on revocation. */
     kick_member: Schema.Boolean,
-    guild_token: Schema.String,
   }),
 ) {}
 
@@ -3423,7 +3432,8 @@ export class BenefitCustomCreate extends Schema.Opaque<BenefitCustomCreate>()(
  */
 export class BenefitDiscordCreateProperties extends Schema.Opaque<BenefitDiscordCreateProperties>()(
   Schema.Struct({
-    guild_token: Schema.String,
+    /** The ID of the Discord server. */
+    guild_id: Schema.String,
     /** The ID of the Discord role to grant. */
     role_id: Schema.String,
     /** Whether to kick the member from the Discord server on revocation. */
@@ -6082,6 +6092,16 @@ export class NotOpenCheckout extends Schema.Opaque<NotOpenCheckout>()(
 ) {}
 
 /**
+ * NotPermitted
+ */
+export class NotPermitted extends Schema.Opaque<NotPermitted>()(
+  Schema.Struct({
+    error: Schema.Literal("NotPermitted"),
+    detail: Schema.String,
+  }),
+) {}
+
+/**
  * PaymentNotReady
  */
 export class PaymentNotReady extends Schema.Opaque<PaymentNotReady>()(
@@ -6107,6 +6127,7 @@ export class TrialAlreadyRedeemed extends Schema.Opaque<TrialAlreadyRedeemed>()(
 export const CheckoutForbiddenError = Schema.Union([
   AlreadyActiveSubscriptionError,
   NotOpenCheckout,
+  NotPermitted,
   PaymentNotReady,
   TrialAlreadyRedeemed,
   DiscountRedemptionLimitReached,
@@ -6503,6 +6524,16 @@ export class CheckoutLinkUpdate extends Schema.Opaque<CheckoutLinkUpdate>()(
     success_url: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** When set, a back button will be shown in the checkout to return to this URL. */
     return_url: Schema.optionalKey(Schema.NullOr(Schema.String)),
+  }),
+) {}
+
+/**
+ * CheckoutLocked
+ */
+export class CheckoutLocked extends Schema.Opaque<CheckoutLocked>()(
+  Schema.Struct({
+    error: Schema.Literal("CheckoutLocked"),
+    detail: Schema.String,
   }),
 ) {}
 
@@ -12685,6 +12716,8 @@ export class Product extends Schema.Opaque<Product>()(
     /** The ID of the organization owning the product. */
     organization_id: Schema.String,
     metadata: MetadataOutputType,
+    /** Whether the product can be permanently deleted. Products referenced by an order, subscription, trial or discount cannot be deleted. */
+    is_deletable: Schema.Boolean,
     /** List of prices for this product. */
     prices: Schema.Array(Schema.Union([LegacyRecurringProductPrice, ProductPrice])),
     /** List of benefits granted by the product. */
@@ -13541,16 +13574,6 @@ export class MissingInvoiceBillingDetails extends Schema.Opaque<MissingInvoiceBi
 ) {}
 
 /**
- * NotPermitted
- */
-export class NotPermitted extends Schema.Opaque<NotPermitted>()(
-  Schema.Struct({
-    error: Schema.Literal("NotPermitted"),
-    detail: Schema.String,
-  }),
-) {}
-
-/**
  * OAuth2ClientConfiguration
  */
 export class OAuth2ClientConfiguration extends Schema.Opaque<OAuth2ClientConfiguration>()(
@@ -14073,6 +14096,16 @@ export const ProductCreate = Schema.Union([ProductCreateRecurring, ProductCreate
 export type ProductCreate = typeof ProductCreate.Type;
 
 /**
+ * ProductNotDeletable
+ */
+export class ProductNotDeletable extends Schema.Opaque<ProductNotDeletable>()(
+  Schema.Struct({
+    error: Schema.Literal("ProductNotDeletable"),
+    detail: Schema.String,
+  }),
+) {}
+
+/**
  * Schema to update a product.
  */
 export class ProductUpdate extends Schema.Opaque<ProductUpdate>()(
@@ -14408,7 +14441,7 @@ export class SubscriptionUpdateBase extends Schema.Opaque<SubscriptionUpdateBase
     proration_behavior: Schema.optionalKey(Schema.NullOr(SubscriptionProrationBehavior)),
     /** Update the subscription to apply a new discount. If set to `null`, the discount will be removed. The change will be applied on the next billing cycle. */
     discount_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
-    /** Set or extend the trial period of the subscription. If set to `now`, the trial will end immediately. */
+    /** Set or extend the trial period of the subscription. If set to `now`, the trial will end immediately and the first billing cycle will be charged synchronously. The subscription remains trialing if the payment fails. */
     trial_end: Schema.optionalKey(
       Schema.Union([DateTimeInput, Schema.Literal("now"), Schema.Null]),
     ),

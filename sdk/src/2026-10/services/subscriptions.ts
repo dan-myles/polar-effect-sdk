@@ -210,13 +210,17 @@ export const update = (
     body: [Models.SubscriptionUpdate, body],
     success: Models.Subscription,
     errors: {
-      402: [[Models.PaymentFailed, Errors.SubscriptionsUpdatePaymentFailedError]],
+      402: [
+        [Models.PaymentFailed, Errors.SubscriptionsUpdatePaymentFailedError],
+        [Models.PaymentActionRequired, Errors.SubscriptionsUpdatePaymentActionRequiredError],
+      ],
       403: [
         [
           Models.AlreadyCanceledSubscription,
           Errors.SubscriptionsUpdateAlreadyCanceledSubscriptionError,
         ],
         [Models.InactiveSubscription, Errors.SubscriptionsUpdateInactiveSubscriptionError],
+        [Models.PaymentNotReady, Errors.SubscriptionsUpdatePaymentNotReadyError],
       ],
       404: [[Models.ResourceNotFound, Errors.SubscriptionsUpdateResourceNotFoundError]],
       409: [
