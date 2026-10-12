@@ -2617,6 +2617,16 @@ export class AuthorizeResponseUser extends Schema.Opaque<AuthorizeResponseUser>(
 ) {}
 
 /**
+ * BadRequest
+ */
+export class BadRequest extends Schema.Opaque<BadRequest>()(
+  Schema.Struct({
+    error: Schema.Literal("BadRequest"),
+    detail: Schema.String,
+  }),
+) {}
+
+/**
  * BalanceCreditOrderMetadata
  */
 export class BalanceCreditOrderMetadata extends Schema.Opaque<BalanceCreditOrderMetadata>()(
@@ -3034,6 +3044,7 @@ export class BenefitCustom extends Schema.Opaque<BenefitCustom>()(
     /** The ID of the organization owning the benefit. */
     organization_id: Schema.String,
     metadata: MetadataOutputType,
+    /** The visibility of the benefit in the customer portal. */
     visibility: openEnum(BenefitVisibility),
     properties: BenefitCustomProperties,
     visibility_configurable: Schema.Boolean,
@@ -3051,7 +3062,6 @@ export class BenefitDiscordProperties extends Schema.Opaque<BenefitDiscordProper
     role_id: Schema.String,
     /** Whether to kick the member from the Discord server on revocation. */
     kick_member: Schema.Boolean,
-    guild_token: Schema.String,
   }),
 ) {}
 
@@ -3080,6 +3090,7 @@ export class BenefitDiscord extends Schema.Opaque<BenefitDiscord>()(
     /** The ID of the organization owning the benefit. */
     organization_id: Schema.String,
     metadata: MetadataOutputType,
+    /** The visibility of the benefit in the customer portal. */
     visibility: openEnum(BenefitVisibility),
     properties: BenefitDiscordProperties,
     visibility_configurable: Schema.Boolean,
@@ -3119,6 +3130,7 @@ export class BenefitDownloadables extends Schema.Opaque<BenefitDownloadables>()(
     /** The ID of the organization owning the benefit. */
     organization_id: Schema.String,
     metadata: MetadataOutputType,
+    /** The visibility of the benefit in the customer portal. */
     visibility: openEnum(BenefitVisibility),
     properties: BenefitDownloadablesProperties,
     visibility_configurable: Schema.Boolean,
@@ -3158,6 +3170,7 @@ export class BenefitFeatureFlag extends Schema.Opaque<BenefitFeatureFlag>()(
     /** The ID of the organization owning the benefit. */
     organization_id: Schema.String,
     metadata: MetadataOutputType,
+    /** The visibility of the benefit in the customer portal. */
     visibility: openEnum(BenefitVisibility),
     properties: BenefitFeatureFlagProperties,
     visibility_configurable: Schema.Boolean,
@@ -3203,6 +3216,7 @@ export class BenefitGitHubRepository extends Schema.Opaque<BenefitGitHubReposito
     /** The ID of the organization owning the benefit. */
     organization_id: Schema.String,
     metadata: MetadataOutputType,
+    /** The visibility of the benefit in the customer portal. */
     visibility: openEnum(BenefitVisibility),
     properties: BenefitGitHubRepositoryProperties,
     visibility_configurable: Schema.Boolean,
@@ -3264,6 +3278,7 @@ export class BenefitLicenseKeys extends Schema.Opaque<BenefitLicenseKeys>()(
     /** The ID of the organization owning the benefit. */
     organization_id: Schema.String,
     metadata: MetadataOutputType,
+    /** The visibility of the benefit in the customer portal. */
     visibility: openEnum(BenefitVisibility),
     properties: BenefitLicenseKeysProperties,
     visibility_configurable: Schema.Boolean,
@@ -3306,6 +3321,7 @@ export class BenefitMeterCredit extends Schema.Opaque<BenefitMeterCredit>()(
     /** The ID of the organization owning the benefit. */
     organization_id: Schema.String,
     metadata: MetadataOutputType,
+    /** The visibility of the benefit in the customer portal. */
     visibility: openEnum(BenefitVisibility),
     properties: BenefitMeterCreditProperties,
     visibility_configurable: Schema.Boolean,
@@ -3355,6 +3371,7 @@ export class BenefitSlackSharedChannel extends Schema.Opaque<BenefitSlackSharedC
     /** The ID of the organization owning the benefit. */
     organization_id: Schema.String,
     metadata: MetadataOutputType,
+    /** The visibility of the benefit in the customer portal. */
     visibility: openEnum(BenefitVisibility),
     properties: BenefitSlackSharedChannelProperties,
     visibility_configurable: Schema.Boolean,
@@ -3423,7 +3440,8 @@ export class BenefitCustomCreate extends Schema.Opaque<BenefitCustomCreate>()(
  */
 export class BenefitDiscordCreateProperties extends Schema.Opaque<BenefitDiscordCreateProperties>()(
   Schema.Struct({
-    guild_token: Schema.String,
+    /** The ID of the Discord server. */
+    guild_id: Schema.String,
     /** The ID of the Discord role to grant. */
     role_id: Schema.String,
     /** Whether to kick the member from the Discord server on revocation. */
@@ -3716,6 +3734,7 @@ export class BenefitSubscriberOrganization extends Schema.Opaque<BenefitSubscrib
     slug: Schema.String,
     /** Avatar URL shown in checkout, customer portal, emails etc. */
     avatar_url: Schema.NullOr(Schema.String),
+    /** Proration behavior applied when customer updates their subscription from the portal. */
     proration_behavior: openEnum(SubscriptionProrationBehavior),
     /** Whether customers can update their subscriptions from the customer portal. */
     allow_customer_updates: Schema.Boolean,
@@ -4259,6 +4278,7 @@ export class Member extends Schema.Opaque<Member>()(
     name: Schema.NullOr(Schema.String),
     /** The ID of the member in your system. This must be unique within the customer. */
     external_id: Schema.NullOr(Schema.String),
+    /** The role of the member within the customer. */
     role: openEnum(MemberRole),
   }),
 ) {}
@@ -5066,7 +5086,9 @@ export class CardPayment extends Schema.Opaque<CardPayment>()(
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the object. */
     id: Schema.String,
+    /** The payment processor. */
     processor: openEnum(PaymentProcessor),
+    /** The payment status. */
     status: openEnum(PaymentStatus),
     /** The payment amount in cents. */
     amount: Schema.Number,
@@ -5088,6 +5110,7 @@ export class CardPayment extends Schema.Opaque<CardPayment>()(
     order_id: Schema.NullOr(Schema.String),
     /** Additional metadata from the payment processor for internal use. */
     processor_metadata: Schema.optionalKey(Schema.Record(Schema.String, Schema.Unknown)),
+    /** Additional metadata for the card payment method. */
     method_metadata: CardPaymentMetadata,
   }),
 ) {}
@@ -5191,6 +5214,7 @@ export class LegacyRecurringProductPriceCustom extends Schema.Opaque<LegacyRecur
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the price. */
     id: Schema.String,
+    /** The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session. */
     source: openEnum(ProductPriceSource),
     amount_type: Schema.Literal("custom"),
     /** The currency in which the customer will be charged. */
@@ -5203,6 +5227,7 @@ export class LegacyRecurringProductPriceCustom extends Schema.Opaque<LegacyRecur
     product_id: Schema.String,
     /** The type of the price. */
     type: Schema.Literal("recurring"),
+    /** The recurring interval of the price. */
     recurring_interval: openEnum(RecurringInterval),
     /** The minimum amount the customer can pay. If 0, the price is 'free or pay what you want'. */
     minimum_amount: Schema.Number,
@@ -5227,6 +5252,7 @@ export class LegacyRecurringProductPriceFixed extends Schema.Opaque<LegacyRecurr
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the price. */
     id: Schema.String,
+    /** The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session. */
     source: openEnum(ProductPriceSource),
     amount_type: Schema.Literal("fixed"),
     /** The currency in which the customer will be charged. */
@@ -5239,6 +5265,7 @@ export class LegacyRecurringProductPriceFixed extends Schema.Opaque<LegacyRecurr
     product_id: Schema.String,
     /** The type of the price. */
     type: Schema.Literal("recurring"),
+    /** The recurring interval of the price. */
     recurring_interval: openEnum(RecurringInterval),
     /** The price in cents. */
     price_amount: Schema.Number,
@@ -5293,6 +5320,7 @@ export class ProductPriceCustom extends Schema.Opaque<ProductPriceCustom>()(
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the price. */
     id: Schema.String,
+    /** The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session. */
     source: openEnum(ProductPriceSource),
     amount_type: Schema.Literal("custom"),
     /** The currency in which the customer will be charged. */
@@ -5323,6 +5351,7 @@ export class ProductPriceFixed extends Schema.Opaque<ProductPriceFixed>()(
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the price. */
     id: Schema.String,
+    /** The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session. */
     source: openEnum(ProductPriceSource),
     amount_type: Schema.Literal("fixed"),
     /** The currency in which the customer will be charged. */
@@ -5347,6 +5376,7 @@ export class ProductPriceMeter extends Schema.Opaque<ProductPriceMeter>()(
     id: Schema.String,
     /** The name of the meter. */
     name: Schema.String,
+    /** The unit of the meter. */
     unit: openEnum(MeterUnit),
     /** The label for the custom unit. */
     custom_label: Schema.NullOr(Schema.String),
@@ -5396,6 +5426,7 @@ export class ProductPriceMeteredTiers extends Schema.Opaque<ProductPriceMeteredT
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the price. */
     id: Schema.String,
+    /** The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session. */
     source: openEnum(ProductPriceSource),
     amount_type: Schema.Literal("metered_tiers"),
     /** The currency in which the customer will be charged. */
@@ -5410,7 +5441,9 @@ export class ProductPriceMeteredTiers extends Schema.Opaque<ProductPriceMeteredT
     cap_amount: Schema.NullOr(Schema.Number),
     /** The ID of the meter associated to the price. */
     meter_id: Schema.String,
+    /** The meter associated to the price. */
     meter: ProductPriceMeter,
+    /** The pricing tiers based on consumed units. */
     tiers: Tiers,
   }),
 ) {}
@@ -5426,6 +5459,7 @@ export class ProductPriceMeteredUnit extends Schema.Opaque<ProductPriceMeteredUn
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the price. */
     id: Schema.String,
+    /** The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session. */
     source: openEnum(ProductPriceSource),
     amount_type: Schema.Literal("metered_unit"),
     /** The currency in which the customer will be charged. */
@@ -5440,6 +5474,7 @@ export class ProductPriceMeteredUnit extends Schema.Opaque<ProductPriceMeteredUn
     cap_amount: Schema.NullOr(Schema.Number),
     /** The ID of the meter associated to the price. */
     meter_id: Schema.String,
+    /** The meter associated to the price. */
     meter: ProductPriceMeter,
     /** The price per unit in cents. */
     unit_amount: Schema.String,
@@ -5469,6 +5504,7 @@ export class ProductPriceSeatTier extends Schema.Opaque<ProductPriceSeatTier>()(
  */
 export class ProductPriceSeatTiersOutput extends Schema.Opaque<ProductPriceSeatTiersOutput>()(
   Schema.Struct({
+    /** How tiers are applied. 'volume' prices all seats at the matching tier's rate. 'graduated' prices each tier's range independently. */
     seat_tier_type: Schema.optionalKey(openEnum(SeatTierType)),
     /** List of pricing tiers */
     tiers: Schema.Array(ProductPriceSeatTier),
@@ -5490,6 +5526,7 @@ export class ProductPriceSeatBased extends Schema.Opaque<ProductPriceSeatBased>(
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the price. */
     id: Schema.String,
+    /** The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session. */
     source: openEnum(ProductPriceSource),
     amount_type: Schema.Literal("seat_based"),
     /** The currency in which the customer will be charged. */
@@ -5500,6 +5537,7 @@ export class ProductPriceSeatBased extends Schema.Opaque<ProductPriceSeatBased>(
     is_archived: Schema.Boolean,
     /** The ID of the product owning the price. */
     product_id: Schema.String,
+    /** Tiered pricing based on seat quantity */
     seat_tiers: ProductPriceSeatTiersOutput,
   }),
 ) {}
@@ -5516,6 +5554,7 @@ export class ProductPriceUnitBased extends Schema.Opaque<ProductPriceUnitBased>(
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the price. */
     id: Schema.String,
+    /** The source of the price . `catalog` is a predefined price, while `ad_hoc` is a price created dynamically on a Checkout session. */
     source: openEnum(ProductPriceSource),
     amount_type: Schema.Literal("unit_based"),
     /** The currency in which the customer will be charged. */
@@ -5526,6 +5565,7 @@ export class ProductPriceUnitBased extends Schema.Opaque<ProductPriceUnitBased>(
     is_archived: Schema.Boolean,
     /** The ID of the product owning the price. */
     product_id: Schema.String,
+    /** Tiered pricing based on the purchased unit quantity. */
     tiers: Tiers,
     /** The minimum purchasable quantity (inclusive). */
     minimum_units: Schema.NullOr(Schema.Number),
@@ -5574,6 +5614,7 @@ export class CheckoutProduct extends Schema.Opaque<CheckoutProduct>()(
     name: Schema.String,
     /** The description of the product. */
     description: Schema.NullOr(Schema.String),
+    /** The visibility of the product. */
     visibility: openEnum(ProductVisibility),
     /** The recurring interval of the product. If `None`, the product is a one-time purchase. */
     recurring_interval: Schema.NullOr(openEnum(RecurringInterval)),
@@ -5622,7 +5663,9 @@ export class Checkout extends Schema.Opaque<Checkout>()(
         ]),
       ),
     ),
+    /** Payment processor used. */
     payment_processor: openEnum(PaymentProcessor),
+    /** Status of the checkout session. - Open: the checkout session was opened. - Expired: the checkout session was expired and is no more accessible. - Confirmed: the user on the checkout session clicked Pay. This is not indicative of the payment's success status. - Failed: the checkout definitely failed for technical reasons and cannot be retried. In most cases, this state is never reached. - Succeeded: the payment on the checkout was performed successfully. */
     status: openEnum(CheckoutStatus),
     /** Client secret used to update and complete the checkout session from the client. */
     client_secret: Schema.String,
@@ -5707,6 +5750,7 @@ export class Checkout extends Schema.Opaque<Checkout>()(
     /** Payment method type selected by the customer in the checkout form, e.g. `card`, `apple_pay` or `upi`. */
     payment_method_type: Schema.NullOr(Schema.String),
     payment_processor_metadata: Schema.Record(Schema.String, Schema.String),
+    /** Determine which billing address fields should be disabled, optional or required in the checkout form. */
     billing_address_fields: CheckoutBillingAddressFields,
     /** The interval unit for the trial period. */
     trial_interval: Schema.NullOr(openEnum(TrialInterval)),
@@ -5790,6 +5834,7 @@ export class CheckoutConfirmStripe extends Schema.Opaque<CheckoutConfirmStripe>(
 export class ProductPriceCustomCreate extends Schema.Opaque<ProductPriceCustomCreate>()(
   Schema.Struct({
     amount_type: Schema.Literal("custom"),
+    /** The currency in which the customer will be charged. */
     price_currency: Schema.optionalKey(PresentmentCurrency),
     /** The tax behavior of the price. If not set, it will default to the organization's default tax behavior. */
     tax_behavior: Schema.optionalKey(Schema.NullOr(TaxBehaviorOption)),
@@ -5808,6 +5853,7 @@ export class ProductPriceCustomCreate extends Schema.Opaque<ProductPriceCustomCr
 export class ProductPriceFixedCreate extends Schema.Opaque<ProductPriceFixedCreate>()(
   Schema.Struct({
     amount_type: Schema.Literal("fixed"),
+    /** The currency in which the customer will be charged. */
     price_currency: Schema.optionalKey(PresentmentCurrency),
     /** The tax behavior of the price. If not set, it will default to the organization's default tax behavior. */
     tax_behavior: Schema.optionalKey(Schema.NullOr(TaxBehaviorOption)),
@@ -5844,11 +5890,13 @@ export class TiersInput extends Schema.Opaque<TiersInput>()(
 export class ProductPriceMeteredTiersCreate extends Schema.Opaque<ProductPriceMeteredTiersCreate>()(
   Schema.Struct({
     amount_type: Schema.Literal("metered_tiers"),
+    /** The currency in which the customer will be charged. */
     price_currency: Schema.optionalKey(PresentmentCurrency),
     /** The tax behavior of the price. If not set, it will default to the organization's default tax behavior. */
     tax_behavior: Schema.optionalKey(Schema.NullOr(TaxBehaviorOption)),
     /** The ID of the meter associated to the price. */
     meter_id: Schema.String,
+    /** Tiered pricing based on consumed units. */
     tiers: TiersInput,
     /** Optional maximum amount in cents that can be charged, regardless of the number of units consumed. */
     cap_amount: Schema.optionalKey(Schema.NullOr(Schema.Number)),
@@ -5861,6 +5909,7 @@ export class ProductPriceMeteredTiersCreate extends Schema.Opaque<ProductPriceMe
 export class ProductPriceMeteredUnitCreate extends Schema.Opaque<ProductPriceMeteredUnitCreate>()(
   Schema.Struct({
     amount_type: Schema.Literal("metered_unit"),
+    /** The currency in which the customer will be charged. */
     price_currency: Schema.optionalKey(PresentmentCurrency),
     /** The tax behavior of the price. If not set, it will default to the organization's default tax behavior. */
     tax_behavior: Schema.optionalKey(Schema.NullOr(TaxBehaviorOption)),
@@ -5882,6 +5931,7 @@ export class ProductPriceMeteredUnitCreate extends Schema.Opaque<ProductPriceMet
  */
 export class ProductPriceSeatTiersInput extends Schema.Opaque<ProductPriceSeatTiersInput>()(
   Schema.Struct({
+    /** How tiers are applied. 'volume' prices all seats at the matching tier's rate. 'graduated' prices each tier's range independently. */
     seat_tier_type: Schema.optionalKey(SeatTierType),
     /** List of pricing tiers */
     tiers: Schema.Array(ProductPriceSeatTier),
@@ -5894,9 +5944,11 @@ export class ProductPriceSeatTiersInput extends Schema.Opaque<ProductPriceSeatTi
 export class ProductPriceSeatBasedCreate extends Schema.Opaque<ProductPriceSeatBasedCreate>()(
   Schema.Struct({
     amount_type: Schema.Literal("seat_based"),
+    /** The currency in which the customer will be charged. */
     price_currency: Schema.optionalKey(PresentmentCurrency),
     /** The tax behavior of the price. If not set, it will default to the organization's default tax behavior. */
     tax_behavior: Schema.optionalKey(Schema.NullOr(TaxBehaviorOption)),
+    /** Tiered pricing based on seat quantity */
     seat_tiers: ProductPriceSeatTiersInput,
   }),
 ) {}
@@ -5908,9 +5960,11 @@ export class ProductPriceSeatBasedCreate extends Schema.Opaque<ProductPriceSeatB
 export class ProductPriceUnitBasedCreate extends Schema.Opaque<ProductPriceUnitBasedCreate>()(
   Schema.Struct({
     amount_type: Schema.Literal("unit_based"),
+    /** The currency in which the customer will be charged. */
     price_currency: Schema.optionalKey(PresentmentCurrency),
     /** The tax behavior of the price. If not set, it will default to the organization's default tax behavior. */
     tax_behavior: Schema.optionalKey(Schema.NullOr(TaxBehaviorOption)),
+    /** Tiered pricing based on the purchased unit quantity. */
     tiers: TiersInput,
     /** The minimum purchasable quantity (inclusive). Defaults to 1 when not set. */
     minimum_units: Schema.optionalKey(Schema.NullOr(Schema.Number)),
@@ -6082,6 +6136,16 @@ export class NotOpenCheckout extends Schema.Opaque<NotOpenCheckout>()(
 ) {}
 
 /**
+ * NotPermitted
+ */
+export class NotPermitted extends Schema.Opaque<NotPermitted>()(
+  Schema.Struct({
+    error: Schema.Literal("NotPermitted"),
+    detail: Schema.String,
+  }),
+) {}
+
+/**
  * PaymentNotReady
  */
 export class PaymentNotReady extends Schema.Opaque<PaymentNotReady>()(
@@ -6107,6 +6171,7 @@ export class TrialAlreadyRedeemed extends Schema.Opaque<TrialAlreadyRedeemed>()(
 export const CheckoutForbiddenError = Schema.Union([
   AlreadyActiveSubscriptionError,
   NotOpenCheckout,
+  NotPermitted,
   PaymentNotReady,
   TrialAlreadyRedeemed,
   DiscountRedemptionLimitReached,
@@ -6133,6 +6198,7 @@ export class CheckoutLinkProduct extends Schema.Opaque<CheckoutLinkProduct>()(
     name: Schema.String,
     /** The description of the product. */
     description: Schema.NullOr(Schema.String),
+    /** The visibility of the product. */
     visibility: openEnum(ProductVisibility),
     /** The recurring interval of the product. If `None`, the product is a one-time purchase. */
     recurring_interval: Schema.NullOr(openEnum(RecurringInterval)),
@@ -6319,6 +6385,7 @@ export class CheckoutLink extends Schema.Opaque<CheckoutLink>()(
     /** The number of interval units for the trial period. */
     trial_interval_count: Schema.NullOr(Schema.Number),
     metadata: MetadataOutputType,
+    /** Payment processor used. */
     payment_processor: openEnum(PaymentProcessor),
     /** Client secret used to access the checkout link. */
     client_secret: Schema.String,
@@ -6507,6 +6574,16 @@ export class CheckoutLinkUpdate extends Schema.Opaque<CheckoutLinkUpdate>()(
 ) {}
 
 /**
+ * CheckoutLocked
+ */
+export class CheckoutLocked extends Schema.Opaque<CheckoutLocked>()(
+  Schema.Struct({
+    error: Schema.Literal("CheckoutLocked"),
+    detail: Schema.String,
+  }),
+) {}
+
+/**
  * CheckoutOrganization
  */
 export class CheckoutOrganization extends Schema.Opaque<CheckoutOrganization>()(
@@ -6523,6 +6600,7 @@ export class CheckoutOrganization extends Schema.Opaque<CheckoutOrganization>()(
     slug: Schema.String,
     /** Avatar URL shown in checkout, customer portal, emails etc. */
     avatar_url: Schema.NullOr(Schema.String),
+    /** Proration behavior applied when customer updates their subscription from the portal. */
     proration_behavior: openEnum(SubscriptionProrationBehavior),
     /** Whether customers can update their subscriptions from the customer portal. */
     allow_customer_updates: Schema.Boolean,
@@ -6553,7 +6631,9 @@ export class CheckoutPublic extends Schema.Opaque<CheckoutPublic>()(
         ]),
       ),
     ),
+    /** Payment processor used. */
     payment_processor: openEnum(PaymentProcessor),
+    /** Status of the checkout session. - Open: the checkout session was opened. - Expired: the checkout session was expired and is no more accessible. - Confirmed: the user on the checkout session clicked Pay. This is not indicative of the payment's success status. - Failed: the checkout definitely failed for technical reasons and cannot be retried. In most cases, this state is never reached. - Succeeded: the payment on the checkout was performed successfully. */
     status: openEnum(CheckoutStatus),
     /** Client secret used to update and complete the checkout session from the client. */
     client_secret: Schema.String,
@@ -6638,6 +6718,7 @@ export class CheckoutPublic extends Schema.Opaque<CheckoutPublic>()(
     /** Payment method type selected by the customer in the checkout form, e.g. `card`, `apple_pay` or `upi`. */
     payment_method_type: Schema.NullOr(Schema.String),
     payment_processor_metadata: Schema.Record(Schema.String, Schema.String),
+    /** Determine which billing address fields should be disabled, optional or required in the checkout form. */
     billing_address_fields: CheckoutBillingAddressFields,
     /** List of products available to select. */
     products: Schema.Array(CheckoutProduct),
@@ -6692,6 +6773,7 @@ export class CheckoutPublicConfirmed extends Schema.Opaque<CheckoutPublicConfirm
         ]),
       ),
     ),
+    /** Payment processor used. */
     payment_processor: openEnum(PaymentProcessor),
     status: Schema.Literal("confirmed"),
     /** Client secret used to update and complete the checkout session from the client. */
@@ -6777,6 +6859,7 @@ export class CheckoutPublicConfirmed extends Schema.Opaque<CheckoutPublicConfirm
     /** Payment method type selected by the customer in the checkout form, e.g. `card`, `apple_pay` or `upi`. */
     payment_method_type: Schema.NullOr(Schema.String),
     payment_processor_metadata: Schema.Record(Schema.String, Schema.String),
+    /** Determine which billing address fields should be disabled, optional or required in the checkout form. */
     billing_address_fields: CheckoutBillingAddressFields,
     /** List of products available to select. */
     products: Schema.Array(CheckoutProduct),
@@ -7216,6 +7299,17 @@ export class CustomerBenefitGrantCustom extends Schema.Opaque<CustomerBenefitGra
 ) {}
 
 /**
+ * CustomerBenefitGrantMember
+ */
+export class CustomerBenefitGrantMember extends Schema.Opaque<CustomerBenefitGrantMember>()(
+  Schema.Struct({
+    /** The ID of the object. */
+    id: Schema.String,
+    oauth_accounts: Schema.Record(Schema.String, CustomerPortalOAuthAccount),
+  }),
+) {}
+
+/**
  * CustomerBenefitGrantDiscord
  */
 export class CustomerBenefitGrantDiscord extends Schema.Opaque<CustomerBenefitGrantDiscord>()(
@@ -7237,6 +7331,7 @@ export class CustomerBenefitGrantDiscord extends Schema.Opaque<CustomerBenefitGr
     is_revoked: Schema.Boolean,
     error: Schema.optionalKey(Schema.NullOr(BenefitGrantError)),
     customer: CustomerPortalCustomer,
+    member: Schema.optionalKey(Schema.NullOr(CustomerBenefitGrantMember)),
     benefit: BenefitDiscordSubscriber,
     properties: BenefitGrantDiscordProperties,
   }),
@@ -7318,6 +7413,7 @@ export class CustomerBenefitGrantGitHubRepository extends Schema.Opaque<Customer
     is_revoked: Schema.Boolean,
     error: Schema.optionalKey(Schema.NullOr(BenefitGrantError)),
     customer: CustomerPortalCustomer,
+    member: Schema.optionalKey(Schema.NullOr(CustomerBenefitGrantMember)),
     benefit: BenefitGitHubRepositorySubscriber,
     properties: BenefitGrantGitHubRepositoryProperties,
   }),
@@ -7843,11 +7939,13 @@ export class Meter extends Schema.Opaque<Meter>()(
     id: Schema.String,
     /** The name of the meter. Will be shown on customer's invoices and usage. */
     name: Schema.String,
+    /** The unit of the meter. */
     unit: openEnum(MeterUnit),
     /** The label for the custom unit. */
     custom_label: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** The multiplier to convert from base unit to display scale. */
     custom_multiplier: Schema.optionalKey(Schema.NullOr(Schema.Number)),
+    /** The filter to apply on events that'll be used to calculate the meter. */
     filter: Filter,
     /** The aggregation to apply on the filtered events to calculate the meter. */
     aggregation: openUnion([CountAggregation, PropertyAggregation, UniqueAggregation], "func", [
@@ -7886,7 +7984,9 @@ export class CustomerMeter extends Schema.Opaque<CustomerMeter>()(
     credited_units: Schema.Number,
     /** The balance of the meter, i.e. the difference between credited and consumed units. */
     balance: Schema.Number,
+    /** The customer associated with this meter. */
     customer: Customer,
+    /** The meter associated with this customer. */
     meter: Meter,
   }),
 ) {}
@@ -7971,10 +8071,13 @@ export class CustomerOrganization extends Schema.Opaque<CustomerOrganization>()(
     slug: Schema.String,
     /** Avatar URL shown in checkout, customer portal, emails etc. */
     avatar_url: Schema.NullOr(Schema.String),
+    /** Proration behavior applied when customer updates their subscription from the portal. */
     proration_behavior: openEnum(SubscriptionProrationBehavior),
     /** Whether customers can update their subscriptions from the customer portal. */
     allow_customer_updates: Schema.Boolean,
+    /** Settings related to the customer portal */
     customer_portal_settings: OrganizationCustomerPortalSettings,
+    /** Feature flags for the customer portal. */
     organization_features: Schema.optionalKey(CustomerOrganizationFeatureSettings),
   }),
 ) {}
@@ -7998,6 +8101,7 @@ export class CustomerOrderProduct extends Schema.Opaque<CustomerOrderProduct>()(
     name: Schema.String,
     /** The description of the product. */
     description: Schema.NullOr(Schema.String),
+    /** The visibility of the product. */
     visibility: openEnum(ProductVisibility),
     /** The recurring interval of the product. If `None`, the product is a one-time purchase. */
     recurring_interval: Schema.NullOr(openEnum(RecurringInterval)),
@@ -8038,9 +8142,11 @@ export class CustomerOrderSubscription extends Schema.Opaque<CustomerOrderSubscr
     amount: Schema.Number,
     /** The currency of the subscription. */
     currency: Schema.String,
+    /** The interval at which the subscription recurs. */
     recurring_interval: openEnum(RecurringInterval),
     /** Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on. */
     recurring_interval_count: Schema.Number,
+    /** The status of the subscription. */
     status: openEnum(SubscriptionStatus),
     /** The start timestamp of the current billing period. */
     current_period_start: Schema.DateTimeUtcFromString,
@@ -8192,6 +8298,7 @@ export class CustomerOrderConfirmPayment extends Schema.Opaque<CustomerOrderConf
     confirmation_token_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** ID of an existing saved payment method. */
     payment_method_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
+    /** Payment processor used. */
     payment_processor: Schema.optionalKey(PaymentProcessor),
   }),
 ) {}
@@ -8273,6 +8380,7 @@ export class CustomerProduct extends Schema.Opaque<CustomerProduct>()(
     name: Schema.String,
     /** The description of the product. */
     description: Schema.NullOr(Schema.String),
+    /** The visibility of the product. */
     visibility: openEnum(ProductVisibility),
     /** The recurring interval of the product. If `None`, the product is a one-time purchase. */
     recurring_interval: Schema.NullOr(openEnum(RecurringInterval)),
@@ -8530,6 +8638,7 @@ export class CustomerPortalMember extends Schema.Opaque<CustomerPortalMember>()(
     email: Schema.String,
     /** The name of the member. */
     name: Schema.NullOr(Schema.String),
+    /** The role of the member within the team. */
     role: openEnum(MemberRole),
   }),
 ) {}
@@ -8575,6 +8684,7 @@ export class CustomerSeat extends Schema.Opaque<CustomerSeat>()(
     subscription_id: Schema.NullOr(Schema.String),
     /** The order ID (for one-time purchase seats) */
     order_id: Schema.NullOr(Schema.String),
+    /** Status of the seat */
     status: openEnum(SeatStatus),
     /** The customer ID. When member_model_enabled is true, this is the billing customer (purchaser). When false, this is the seat member customer. */
     customer_id: Schema.NullOr(Schema.String),
@@ -8630,6 +8740,7 @@ export class CustomerSeatAssign extends Schema.Opaque<CustomerSeatAssign>()(
  */
 export class CustomerSeatClaimResponse extends Schema.Opaque<CustomerSeatClaimResponse>()(
   Schema.Struct({
+    /** The claimed seat */
     seat: CustomerSeat,
     /** Session token for immediate customer portal access */
     customer_session_token: Schema.String,
@@ -8703,7 +8814,9 @@ export class CustomerStateBenefitGrant extends Schema.Opaque<CustomerStateBenefi
     granted_at: Schema.DateTimeUtcFromString,
     /** The ID of the benefit concerned by this grant. */
     benefit_id: Schema.String,
+    /** The type of the benefit concerned by this grant. */
     benefit_type: openEnum(BenefitType),
+    /** The metadata of the benefit concerned by this grant. */
     benefit_metadata: MetadataOutputType,
     properties: Schema.Union([
       BenefitGrantDiscordProperties,
@@ -8791,6 +8904,7 @@ export class CustomerStateSubscription extends Schema.Opaque<CustomerStateSubscr
     amount: Schema.Number,
     /** The currency of the subscription. */
     currency: Schema.String,
+    /** The interval at which the subscription recurs. */
     recurring_interval: openEnum(RecurringInterval),
     /** The start timestamp of the current billing period. */
     current_period_start: Schema.DateTimeUtcFromString,
@@ -8986,6 +9100,7 @@ export class CustomerSubscriptionProduct extends Schema.Opaque<CustomerSubscript
     name: Schema.String,
     /** The description of the product. */
     description: Schema.NullOr(Schema.String),
+    /** The visibility of the product. */
     visibility: openEnum(ProductVisibility),
     /** The recurring interval of the product. If `None`, the product is a one-time purchase. */
     recurring_interval: Schema.NullOr(openEnum(RecurringInterval)),
@@ -9048,9 +9163,11 @@ export class CustomerSubscription extends Schema.Opaque<CustomerSubscription>()(
     amount: Schema.Number,
     /** The currency of the subscription. */
     currency: Schema.String,
+    /** The interval at which the subscription recurs. */
     recurring_interval: openEnum(RecurringInterval),
     /** Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on. */
     recurring_interval_count: Schema.Number,
+    /** The status of the subscription. */
     status: openEnum(SubscriptionStatus),
     /** The start timestamp of the current billing period. */
     current_period_start: Schema.DateTimeUtcFromString,
@@ -9343,6 +9460,7 @@ export class DiscountProduct extends Schema.Opaque<DiscountProduct>()(
     name: Schema.String,
     /** The description of the product. */
     description: Schema.NullOr(Schema.String),
+    /** The visibility of the product. */
     visibility: openEnum(ProductVisibility),
     /** The recurring interval of the product. If `None`, the product is a one-time purchase. */
     recurring_interval: Schema.NullOr(openEnum(RecurringInterval)),
@@ -9549,6 +9667,7 @@ export class DiscountFixedCreate extends Schema.Opaque<DiscountFixedCreate>()(
     /** The ID of the organization owning the discount. **Required unless you use an organization token.** */
     organization_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
     type: Schema.optionalKey(Schema.Literal("fixed")),
+    /** For subscriptions, determines if the discount should be applied once on the first invoice, forever, or for a certain number of months determined by `duration_in_months`. */
     duration: DiscountDuration,
     /** Number of months the discount should be applied. Required when `duration` is `repeating`. Must be omitted otherwise. For this to work on yearly pricing, you should multiply this by 12. For example, to apply the discount for 2 years, set this to 24. */
     duration_in_months: Schema.optionalKey(Schema.NullOr(Schema.Number)),
@@ -9583,6 +9702,7 @@ export class DiscountPercentageCreate extends Schema.Opaque<DiscountPercentageCr
     /** The ID of the organization owning the discount. **Required unless you use an organization token.** */
     organization_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
     type: Schema.optionalKey(Schema.Literal("percentage")),
+    /** For subscriptions, determines if the discount should be applied once on the first invoice, forever, or for a certain number of months determined by `duration_in_months`. */
     duration: DiscountDuration,
     /** Number of months the discount should be applied. Required when `duration` is `repeating`. Must be omitted otherwise. For this to work on yearly pricing, you should multiply this by 12. For example, to apply the discount for 2 years, set this to 24. */
     duration_in_months: Schema.optionalKey(Schema.NullOr(Schema.Number)),
@@ -9646,6 +9766,7 @@ export class DisputeCustomer extends Schema.Opaque<DisputeCustomer>()(
     email: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address. */
     email_verified: Schema.Boolean,
+    /** The type of customer: 'individual' for single users, 'team' for customers with multiple members. */
     type: openEnum(CustomerType),
     /** The name of the customer. */
     name: Schema.NullOr(Schema.String),
@@ -9679,6 +9800,7 @@ export class Dispute extends Schema.Opaque<Dispute>()(
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the object. */
     id: Schema.String,
+    /** Status of the dispute. `prevented` means we issued a refund before the dispute was escalated, avoiding any fees. */
     status: openEnum(DisputeStatus),
     /** Whether the dispute has been resolved (won or lost). */
     resolved: Schema.Boolean,
@@ -9700,6 +9822,7 @@ export class Dispute extends Schema.Opaque<Dispute>()(
     order_id: Schema.String,
     /** The ID of the payment associated with the dispute. */
     payment_id: Schema.String,
+    /** The customer who was charged for the disputed payment. */
     customer: DisputeCustomer,
     /** The ID of the support case for this dispute, if one was opened. */
     case_id: Schema.NullOr(Schema.String),
@@ -11160,6 +11283,7 @@ export class EventCreateCustomer extends Schema.Opaque<EventCreateCustomer>()(
     external_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** The ID of the parent event. Can be either a Polar event ID (UUID) or an external event ID. */
     parent_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
+    /** Key-value object allowing you to store additional information about the event. Some keys like `_llm` are structured data that are handled specially by Polar. The key must be a string with a maximum length of **40 characters**. The value must be either: * A string with a maximum length of **500 characters** * An integer * A floating-point number * A boolean You can store up to **50 key-value pairs**. */
     metadata: Schema.optionalKey(EventMetadataInput),
     /** ID of the customer in your Polar organization associated with the event. */
     customer_id: Schema.String,
@@ -11183,6 +11307,7 @@ export class EventCreateExternalCustomer extends Schema.Opaque<EventCreateExtern
     external_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** The ID of the parent event. Can be either a Polar event ID (UUID) or an external event ID. */
     parent_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
+    /** Key-value object allowing you to store additional information about the event. Some keys like `_llm` are structured data that are handled specially by Polar. The key must be a string with a maximum length of **40 characters**. The value must be either: * A string with a maximum length of **500 characters** * An integer * A floating-point number * A boolean You can store up to **50 key-value pairs**. */
     metadata: Schema.optionalKey(EventMetadataInput),
     /** ID of the customer in your system associated with the event. */
     external_customer_id: Schema.String,
@@ -11200,6 +11325,7 @@ export class EventName extends Schema.Opaque<EventName>()(
     name: Schema.String,
     /** Human readable label of the event. */
     label: Schema.String,
+    /** The source of the event. `system` events are created by Polar. `user` events are the one you create through our ingestion API. */
     source: openEnum(EventSource),
     /** Number of times the event has occurred. */
     occurrences: Schema.Number,
@@ -11263,6 +11389,7 @@ export class EventTypeWithStats extends Schema.Opaque<EventTypeWithStats>()(
     label_property_selector: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** The ID of the organization owning the event type. */
     organization_id: Schema.String,
+    /** The source of the events (system or user). */
     source: openEnum(EventSource),
     /** Number of times the event has occurred. */
     occurrences: Schema.Number,
@@ -11541,7 +11668,9 @@ export class GenericPayment extends Schema.Opaque<GenericPayment>()(
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the object. */
     id: Schema.String,
+    /** The payment processor. */
     processor: openEnum(PaymentProcessor),
+    /** The payment status. */
     status: openEnum(PaymentStatus),
     /** The payment amount in cents. */
     amount: Schema.Number,
@@ -11584,6 +11713,7 @@ export class LicenseKeyCustomer extends Schema.Opaque<LicenseKeyCustomer>()(
     email: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address. */
     email_verified: Schema.Boolean,
+    /** The type of customer: 'individual' for single users, 'team' for customers with multiple members. */
     type: openEnum(CustomerType),
     /** The name of the customer. */
     name: Schema.NullOr(Schema.String),
@@ -11633,9 +11763,9 @@ export class GrantedLicenseKey extends Schema.Opaque<GrantedLicenseKey>()(
     customer_id: Schema.String,
     customer: LicenseKeyCustomer,
     /** The ID of the seat member holding this key, if any. */
-    member_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
+    member_id: Schema.NullOr(Schema.String),
     /** The seat member holding this key. Set for keys granted through a seat-based product; `null` for keys granted to the customer directly. */
-    member: Schema.optionalKey(Schema.NullOr(LicenseKeyMember)),
+    member: Schema.NullOr(LicenseKeyMember),
     /** The benefit ID. */
     benefit_id: Schema.String,
     key: Schema.String,
@@ -11724,7 +11854,9 @@ export class KrCardPayment extends Schema.Opaque<KrCardPayment>()(
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the object. */
     id: Schema.String,
+    /** The payment processor. */
     processor: openEnum(PaymentProcessor),
+    /** The payment status. */
     status: openEnum(PaymentStatus),
     /** The payment amount in cents. */
     amount: Schema.Number,
@@ -11746,6 +11878,7 @@ export class KrCardPayment extends Schema.Opaque<KrCardPayment>()(
     order_id: Schema.NullOr(Schema.String),
     /** Additional metadata from the payment processor for internal use. */
     processor_metadata: Schema.optionalKey(Schema.Record(Schema.String, Schema.Unknown)),
+    /** Additional metadata for the South Korean card payment method. */
     method_metadata: KrCardPaymentMetadata,
   }),
 ) {}
@@ -11819,9 +11952,9 @@ export class LicenseKeyRead extends Schema.Opaque<LicenseKeyRead>()(
     customer_id: Schema.String,
     customer: LicenseKeyCustomer,
     /** The ID of the seat member holding this key, if any. */
-    member_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
+    member_id: Schema.NullOr(Schema.String),
     /** The seat member holding this key. Set for keys granted through a seat-based product; `null` for keys granted to the customer directly. */
-    member: Schema.optionalKey(Schema.NullOr(LicenseKeyMember)),
+    member: Schema.NullOr(LicenseKeyMember),
     /** The benefit ID. */
     benefit_id: Schema.String,
     key: Schema.String,
@@ -11911,9 +12044,9 @@ export class LicenseKeyWithActivations extends Schema.Opaque<LicenseKeyWithActiv
     customer_id: Schema.String,
     customer: LicenseKeyCustomer,
     /** The ID of the seat member holding this key, if any. */
-    member_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
+    member_id: Schema.NullOr(Schema.String),
     /** The seat member holding this key. Set for keys granted through a seat-based product; `null` for keys granted to the customer directly. */
-    member: Schema.optionalKey(Schema.NullOr(LicenseKeyMember)),
+    member: Schema.NullOr(LicenseKeyMember),
     /** The benefit ID. */
     benefit_id: Schema.String,
     key: Schema.String,
@@ -12207,6 +12340,7 @@ export class OrderCustomer extends Schema.Opaque<OrderCustomer>()(
     email: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address. */
     email_verified: Schema.Boolean,
+    /** The type of customer: 'individual' for single users, 'team' for customers with multiple members. */
     type: openEnum(CustomerType),
     /** The name of the customer. */
     name: Schema.NullOr(Schema.String),
@@ -12247,6 +12381,7 @@ export class OrderProduct extends Schema.Opaque<OrderProduct>()(
     name: Schema.String,
     /** The description of the product. */
     description: Schema.NullOr(Schema.String),
+    /** The visibility of the product. */
     visibility: openEnum(ProductVisibility),
     /** The recurring interval of the product. If `None`, the product is a one-time purchase. */
     recurring_interval: Schema.NullOr(openEnum(RecurringInterval)),
@@ -12281,9 +12416,11 @@ export class OrderSubscription extends Schema.Opaque<OrderSubscription>()(
     amount: Schema.Number,
     /** The currency of the subscription. */
     currency: Schema.String,
+    /** The interval at which the subscription recurs. */
     recurring_interval: openEnum(RecurringInterval),
     /** Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on. */
     recurring_interval_count: Schema.Number,
+    /** The status of the subscription. */
     status: openEnum(SubscriptionStatus),
     /** The start timestamp of the current billing period. */
     current_period_start: Schema.DateTimeUtcFromString,
@@ -12521,8 +12658,6 @@ export class OrganizationFeatureSettings extends Schema.Opaque<OrganizationFeatu
     compass_enabled: Schema.optionalKey(Schema.Boolean),
     /** If this organization can migrate its billing from another provider (e.g. Stripe) to Polar. */
     merchant_migration_enabled: Schema.optionalKey(Schema.Boolean),
-    /** If this organization's checkout tells the browser to refuse framing from any host outside its embed hosts. */
-    frame_ancestors_enforced: Schema.optionalKey(Schema.Boolean),
   }),
 ) {}
 
@@ -12531,6 +12666,7 @@ export class OrganizationFeatureSettings extends Schema.Opaque<OrganizationFeatu
  */
 export class OrganizationSocialLink extends Schema.Opaque<OrganizationSocialLink>()(
   Schema.Struct({
+    /** The social platform of the URL */
     platform: openEnum(OrganizationSocialPlatforms),
     /** The URL to the organization profile */
     url: Schema.String,
@@ -12567,6 +12703,7 @@ export class Organization extends Schema.Opaque<Organization>()(
     slug: Schema.String,
     /** Avatar URL shown in checkout, customer portal, emails etc. */
     avatar_url: Schema.NullOr(Schema.String),
+    /** Proration behavior applied when customer updates their subscription from the portal. */
     proration_behavior: openEnum(SubscriptionProrationBehavior),
     /** Whether customers can update their subscriptions from the customer portal. */
     allow_customer_updates: Schema.Boolean,
@@ -12576,6 +12713,7 @@ export class Organization extends Schema.Opaque<Organization>()(
     website: Schema.NullOr(Schema.String),
     /** Links to social profiles. */
     socials: Schema.Array(OrganizationSocialLink),
+    /** Current organization status */
     status: openEnum(OrganizationStatus),
     /** When the business details were submitted for review. */
     details_submitted_at: Schema.NullOr(Schema.DateTimeUtcFromString),
@@ -12585,12 +12723,17 @@ export class Organization extends Schema.Opaque<Organization>()(
     sso_enforced: Schema.Boolean,
     /** Default presentment currency. Used as fallback in checkout and customer portal, if the customer's local currency is not available. */
     default_presentment_currency: Schema.String,
+    /** Default tax behavior applied on products. */
     default_tax_behavior: openEnum(TaxBehaviorOption),
     /** Organization feature settings */
     feature_settings: Schema.NullOr(OrganizationFeatureSettings),
+    /** Settings related to subscriptions management */
     subscription_settings: OrganizationSubscriptionSettings,
+    /** Settings related to customer emails */
     customer_email_settings: OrganizationCustomerEmailSettings,
+    /** Settings related to the customer portal */
     customer_portal_settings: OrganizationCustomerPortalSettings,
+    /** Settings related to disputes */
     dispute_settings: OrganizationDisputeSettings,
     /** Hosts allowed to embed this organization's checkout. An entry is a host and an optional port, without a scheme: HTTPS is always allowed, and HTTP too for local hosts — `localhost`, any `.localhost` or `.local` name, and loopback or private addresses. `*.example.com` matches any subdomain, but not `example.com` itself. An app origin such as `chrome-extension://abcdef` carries its scheme, having no host to match on. */
     embed_hosts: Schema.Array(Schema.String),
@@ -12600,6 +12743,7 @@ export class Organization extends Schema.Opaque<Organization>()(
     account_id: Schema.NullOr(Schema.String),
     /** ID of the payout account. */
     payout_account_id: Schema.NullOr(Schema.String),
+    /** Capabilities currently granted to the organization. */
     capabilities: OrganizationCapabilities,
   }),
 ) {}
@@ -12669,6 +12813,7 @@ export class Product extends Schema.Opaque<Product>()(
     name: Schema.String,
     /** The description of the product. */
     description: Schema.NullOr(Schema.String),
+    /** The visibility of the product. */
     visibility: openEnum(ProductVisibility),
     /** The recurring interval of the product. If `None`, the product is a one-time purchase. */
     recurring_interval: Schema.NullOr(openEnum(RecurringInterval)),
@@ -12685,6 +12830,8 @@ export class Product extends Schema.Opaque<Product>()(
     /** The ID of the organization owning the product. */
     organization_id: Schema.String,
     metadata: MetadataOutputType,
+    /** Whether the product can be permanently deleted. Products referenced by an order, subscription, trial or discount cannot be deleted. */
+    is_deletable: Schema.Boolean,
     /** List of prices for this product. */
     prices: Schema.Array(Schema.Union([LegacyRecurringProductPrice, ProductPrice])),
     /** List of benefits granted by the product. */
@@ -12718,6 +12865,7 @@ export class RefundDispute extends Schema.Opaque<RefundDispute>()(
     modified_at: Schema.NullOr(Schema.DateTimeUtcFromString),
     /** The ID of the object. */
     id: Schema.String,
+    /** Status of the dispute. `prevented` means we issued a refund before the dispute was escalated, avoiding any fees. */
     status: openEnum(DisputeStatus),
     /** Whether the dispute has been resolved (won or lost). */
     resolved: Schema.Boolean,
@@ -12796,6 +12944,7 @@ export class SubscriptionCustomer extends Schema.Opaque<SubscriptionCustomer>()(
     email: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** Whether the customer email address is verified. The address is automatically verified when the customer accesses the customer portal using their email address. */
     email_verified: Schema.Boolean,
+    /** The type of customer: 'individual' for single users, 'team' for customers with multiple members. */
     type: openEnum(CustomerType),
     /** The name of the customer. */
     name: Schema.NullOr(Schema.String),
@@ -12835,6 +12984,7 @@ export class SubscriptionMeter extends Schema.Opaque<SubscriptionMeter>()(
     amount: Schema.Number,
     /** The ID of the meter. */
     meter_id: Schema.String,
+    /** The meter associated with this subscription. */
     meter: Meter,
   }),
 ) {}
@@ -12854,9 +13004,11 @@ export class Subscription extends Schema.Opaque<Subscription>()(
     amount: Schema.Number,
     /** The currency of the subscription. */
     currency: Schema.String,
+    /** The interval at which the subscription recurs. */
     recurring_interval: openEnum(RecurringInterval),
     /** Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on. */
     recurring_interval_count: Schema.Number,
+    /** The status of the subscription. */
     status: openEnum(SubscriptionStatus),
     /** The start timestamp of the current billing period. */
     current_period_start: Schema.DateTimeUtcFromString,
@@ -12971,6 +13123,7 @@ export class WebhookEvent extends Schema.Opaque<WebhookEvent>()(
     api_version: Schema.String,
     /** The payload of the webhook event. */
     payload: Schema.NullOr(Schema.String),
+    /** The type of the webhook event. */
     type: openEnum(WebhookEventType),
     /** Whether this event is archived. Archived events can't be redelivered, and the payload is not accessible anymore. */
     is_archived: Schema.Boolean,
@@ -12994,6 +13147,7 @@ export class WebhookDelivery extends Schema.Opaque<WebhookDelivery>()(
     http_code: Schema.NullOr(Schema.Number),
     /** The response body returned by the URL, or the error message if the endpoint was unreachable. */
     response: Schema.NullOr(Schema.String),
+    /** The webhook event sent by this delivery. */
     webhook_event: WebhookEvent,
   }),
 ) {}
@@ -13025,6 +13179,7 @@ export class WebhookEndpoint extends Schema.Opaque<WebhookEndpoint>()(
     name: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** The API version that'll be used in event payloads. */
     api_version: Schema.String,
+    /** The format of the webhook payload. */
     format: openEnum(WebhookFormat),
     /** The secret used to sign the webhook events. */
     secret: Schema.String,
@@ -13128,11 +13283,13 @@ export class MeterCreate extends Schema.Opaque<MeterCreate>()(
     ),
     /** The name of the meter. Will be shown on customer's invoices and usage. */
     name: Schema.String,
+    /** The unit of the meter. */
     unit: Schema.optionalKey(MeterUnit),
     /** The label for the custom unit, e.g. 'request'. Required when unit is 'custom'. */
     custom_label: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** The multiplier to convert from the base unit to display scale, e.g. 1000 to display per 1000 units. Defaults to 1 when not provided. */
     custom_multiplier: Schema.optionalKey(Schema.NullOr(Schema.Number)),
+    /** The filter to apply on events that'll be used to calculate the meter. */
     filter: Filter,
     /** The aggregation to apply on the filtered events to calculate the meter. */
     aggregation: Schema.Union([CountAggregation, PropertyAggregation, UniqueAggregation]),
@@ -13201,6 +13358,7 @@ export class Metric extends Schema.Opaque<Metric>()(
     slug: Schema.String,
     /** Human-readable name for the metric. */
     display_name: Schema.String,
+    /** Type of the metric, useful to know the unit or format of the value. */
     type: openEnum(MetricType),
   }),
 ) {}
@@ -13416,10 +13574,15 @@ export class MetricsIntervalLimit extends Schema.Opaque<MetricsIntervalLimit>()(
  */
 export class MetricsIntervalsLimits extends Schema.Opaque<MetricsIntervalsLimits>()(
   Schema.Struct({
+    /** Limits for the hour interval. */
     hour: MetricsIntervalLimit,
+    /** Limits for the day interval. */
     day: MetricsIntervalLimit,
+    /** Limits for the week interval. */
     week: MetricsIntervalLimit,
+    /** Limits for the month interval. */
     month: MetricsIntervalLimit,
+    /** Limits for the year interval. */
     year: MetricsIntervalLimit,
   }),
 ) {}
@@ -13431,6 +13594,7 @@ export class MetricsLimits extends Schema.Opaque<MetricsLimits>()(
   Schema.Struct({
     /** Minimum date to get metrics. */
     min_date: Schema.String,
+    /** Limits for each interval. */
     intervals: MetricsIntervalsLimits,
   }),
 ) {}
@@ -13525,7 +13689,9 @@ export class MetricsResponse extends Schema.Opaque<MetricsResponse>()(
   Schema.Struct({
     /** List of data for each timestamp. */
     periods: Schema.Array(MetricPeriod),
+    /** Totals for the whole selected period. */
     totals: MetricsTotals,
+    /** Information about the returned metrics. */
     metrics: Metrics,
   }),
 ) {}
@@ -13536,16 +13702,6 @@ export class MetricsResponse extends Schema.Opaque<MetricsResponse>()(
 export class MissingInvoiceBillingDetails extends Schema.Opaque<MissingInvoiceBillingDetails>()(
   Schema.Struct({
     error: Schema.Literal("MissingInvoiceBillingDetails"),
-    detail: Schema.String,
-  }),
-) {}
-
-/**
- * NotPermitted
- */
-export class NotPermitted extends Schema.Opaque<NotPermitted>()(
-  Schema.Struct({
-    error: Schema.Literal("NotPermitted"),
     detail: Schema.String,
   }),
 ) {}
@@ -13816,7 +13972,9 @@ export class OrganizationCreate extends Schema.Opaque<OrganizationCreate>()(
     subscription_settings: Schema.optionalKey(Schema.NullOr(OrganizationSubscriptionSettings)),
     customer_email_settings: Schema.optionalKey(Schema.NullOr(OrganizationCustomerEmailSettings)),
     customer_portal_settings: Schema.optionalKey(Schema.NullOr(OrganizationCustomerPortalSettings)),
+    /** Default presentment currency for the organization */
     default_presentment_currency: Schema.optionalKey(PresentmentCurrency),
+    /** Default tax behavior applied on products. */
     default_tax_behavior: Schema.optionalKey(TaxBehaviorOption),
   }),
 ) {}
@@ -13996,6 +14154,7 @@ export class ProductCreateOneTime extends Schema.Opaque<ProductCreateOneTime>()(
     name: Schema.String,
     /** The description of the product. */
     description: Schema.optionalKey(Schema.NullOr(Schema.String)),
+    /** The visibility of the product. */
     visibility: Schema.optionalKey(ProductVisibility),
     /** List of available prices for this product. It may combine at most one fixed price with one seat-based price (billed as `fixed + seat_charge`), or contain a single custom or free price, plus any number of metered prices. A free price cannot be combined with other prices, and a custom price cannot be combined with a fixed or seat-based price. Metered prices are not supported on one-time purchase products. */
     prices: Schema.Array(
@@ -14034,6 +14193,7 @@ export class ProductCreateRecurring extends Schema.Opaque<ProductCreateRecurring
     name: Schema.String,
     /** The description of the product. */
     description: Schema.optionalKey(Schema.NullOr(Schema.String)),
+    /** The visibility of the product. */
     visibility: Schema.optionalKey(ProductVisibility),
     /** List of available prices for this product. It may combine at most one fixed price with one seat-based price (billed as `fixed + seat_charge`), or contain a single custom or free price, plus any number of metered prices. A free price cannot be combined with other prices, and a custom price cannot be combined with a fixed or seat-based price. Metered prices are not supported on one-time purchase products. */
     prices: Schema.Array(
@@ -14056,6 +14216,7 @@ export class ProductCreateRecurring extends Schema.Opaque<ProductCreateRecurring
     trial_interval: Schema.optionalKey(Schema.NullOr(TrialInterval)),
     /** The number of interval units for the trial period. */
     trial_interval_count: Schema.optionalKey(Schema.NullOr(Schema.Number)),
+    /** The recurring interval of the product. */
     recurring_interval: RecurringInterval,
     /** Number of interval units of the subscription. If this is set to 1 the charge will happen every interval (e.g. every month), if set to 2 it will be every other month, and so on. */
     recurring_interval_count: Schema.optionalKey(Schema.Number),
@@ -14071,6 +14232,16 @@ export class ProductCreateRecurring extends Schema.Opaque<ProductCreateRecurring
  */
 export const ProductCreate = Schema.Union([ProductCreateRecurring, ProductCreateOneTime]);
 export type ProductCreate = typeof ProductCreate.Type;
+
+/**
+ * ProductNotDeletable
+ */
+export class ProductNotDeletable extends Schema.Opaque<ProductNotDeletable>()(
+  Schema.Struct({
+    error: Schema.Literal("ProductNotDeletable"),
+    detail: Schema.String,
+  }),
+) {}
 
 /**
  * Schema to update a product.
@@ -14193,9 +14364,9 @@ export class RotatedLicenseKey extends Schema.Opaque<RotatedLicenseKey>()(
     customer_id: Schema.String,
     customer: LicenseKeyCustomer,
     /** The ID of the seat member holding this key, if any. */
-    member_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
+    member_id: Schema.NullOr(Schema.String),
     /** The seat member holding this key. Set for keys granted through a seat-based product; `null` for keys granted to the customer directly. */
-    member: Schema.optionalKey(Schema.NullOr(LicenseKeyMember)),
+    member: Schema.NullOr(LicenseKeyMember),
     /** The benefit ID. */
     benefit_id: Schema.String,
     key: Schema.String,
@@ -14408,7 +14579,7 @@ export class SubscriptionUpdateBase extends Schema.Opaque<SubscriptionUpdateBase
     proration_behavior: Schema.optionalKey(Schema.NullOr(SubscriptionProrationBehavior)),
     /** Update the subscription to apply a new discount. If set to `null`, the discount will be removed. The change will be applied on the next billing cycle. */
     discount_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
-    /** Set or extend the trial period of the subscription. If set to `now`, the trial will end immediately. */
+    /** Set or extend the trial period of the subscription. If set to `now`, the trial will end immediately and the first billing cycle will be charged synchronously. The subscription remains trialing if the payment fails. */
     trial_end: Schema.optionalKey(
       Schema.Union([DateTimeInput, Schema.Literal("now"), Schema.Null]),
     ),
@@ -14566,9 +14737,9 @@ export class ValidatedLicenseKey extends Schema.Opaque<ValidatedLicenseKey>()(
     customer_id: Schema.String,
     customer: LicenseKeyCustomer,
     /** The ID of the seat member holding this key, if any. */
-    member_id: Schema.optionalKey(Schema.NullOr(Schema.String)),
+    member_id: Schema.NullOr(Schema.String),
     /** The seat member holding this key. Set for keys granted through a seat-based product; `null` for keys granted to the customer directly. */
-    member: Schema.optionalKey(Schema.NullOr(LicenseKeyMember)),
+    member: Schema.NullOr(LicenseKeyMember),
     /** The benefit ID. */
     benefit_id: Schema.String,
     key: Schema.String,
@@ -14595,6 +14766,7 @@ export class WebhookEndpointCreate extends Schema.Opaque<WebhookEndpointCreate>(
     name: Schema.optionalKey(Schema.NullOr(Schema.String)),
     /** The API version that'll be used in event payloads. */
     api_version: Schema.optionalKey(ApiVersion),
+    /** The format of the webhook payload. */
     format: WebhookFormat,
     /** The events that will trigger the webhook. */
     events: Schema.Array(WebhookEventType),
