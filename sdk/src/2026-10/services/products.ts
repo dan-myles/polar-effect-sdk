@@ -95,6 +95,31 @@ export const get = (
   });
 
 /**
+ * Delete a product.
+ *
+ * Only products without orders, subscriptions, trials or discounts can be deleted.
+ * Products that are in use can only be archived.
+ *
+ * **Scopes**: `products:write`
+ */
+const delete_ = (
+  id: string,
+): Effect.Effect<void, Errors.ProductsDeleteErrors | PolarRequestError, PolarClient> =>
+  request({
+    method: "DELETE",
+    path: "/v1/products/{id}",
+    pathParams: { id: id },
+    success: "none",
+    errors: {
+      403: [[Models.NotPermitted, Errors.ProductsDeleteNotPermittedError]],
+      404: [[Models.ResourceNotFound, Errors.ProductsDeleteResourceNotFoundError]],
+      409: [[Models.ProductNotDeletable, Errors.ProductsDeleteProductNotDeletableError]],
+      422: [[Models.HTTPValidationError, Errors.ProductsDeleteHTTPValidationError]],
+    },
+  });
+export { delete_ as delete };
+
+/**
  * Update a product.
  *
  * **Scopes**: `products:write`
