@@ -7,6 +7,8 @@ import * as Errors from "../errors";
 import * as Models from "../models";
 
 /**
+ * List seats for a subscription or order.
+ *
  * **Scopes**: `customer_seats:read`
  */
 export const listSeats = (query?: {
@@ -31,6 +33,8 @@ export const listSeats = (query?: {
   });
 
 /**
+ * Assign a seat for a subscription or order.
+ *
  * **Scopes**: `customer_seats:write`
  */
 export const assignSeat = (
@@ -55,6 +59,8 @@ export const assignSeat = (
   });
 
 /**
+ * Revoke a customer seat.
+ *
  * **Scopes**: `customer_seats:write`
  */
 export const revokeSeat = (
@@ -78,6 +84,8 @@ export const revokeSeat = (
   });
 
 /**
+ * Resend an invitation for a pending customer seat.
+ *
  * **Scopes**: `customer_seats:write`
  */
 export const resendInvitation = (
@@ -102,6 +110,7 @@ export const resendInvitation = (
   });
 
 /**
+ * Get claim information for a customer seat invitation.
  */
 export const getClaimInfo = (
   invitation_token: string,
@@ -124,6 +133,7 @@ export const getClaimInfo = (
   });
 
 /**
+ * Claim a customer seat with an invitation token.
  */
 export const claimSeat = (
   body: Models.SeatClaim,
