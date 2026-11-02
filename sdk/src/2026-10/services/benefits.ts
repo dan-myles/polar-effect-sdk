@@ -58,7 +58,7 @@ export const listStream = (query?: {
   paginate(query?.page ?? 1, (page) => list({ ...query, page }));
 
 /**
- * Create a benefit.
+ * Create a benefit, for example license keys, file downloads or Discord access.
  *
  * **Scopes**: `benefits:write`
  */

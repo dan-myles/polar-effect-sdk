@@ -1,8 +1,6 @@
 import type { Effect } from "effect";
 import type { Stream } from "effect";
 
-import { Schema } from "effect";
-
 import type { PolarClient, PolarRequestError } from "../../../PolarClient";
 
 import { paginate, request } from "../../../PolarClient";
@@ -125,7 +123,7 @@ export const validate = (
     body: [Models.LicenseKeyValidate, body],
     success: Models.ValidatedLicenseKey,
     errors: {
-      400: [[Schema.Unknown, Errors.CustomerPortalLicenseKeysValidateBadRequestError]],
+      400: [[Models.BadRequest, Errors.CustomerPortalLicenseKeysValidateBadRequestError]],
       404: [
         [Models.ResourceNotFound, Errors.CustomerPortalLicenseKeysValidateResourceNotFoundError],
       ],
