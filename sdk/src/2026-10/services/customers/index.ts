@@ -58,6 +58,8 @@ export const listStream = (query?: {
 /**
  * Create a customer.
  *
+ * Set `external_id` to the customer's ID in your system to look it up by that ID.
+ *
  * **Scopes**: `customers:write`
  */
 export const create = (

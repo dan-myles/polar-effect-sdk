@@ -208,7 +208,7 @@ export type SubscriptionsRevokeErrors =
   | SubscriptionsRevokeHTTPValidationError;
 
 /**
- * Payment required to apply the subscription update.
+ * The charge failed, or requires customer authentication that can't be completed off-session.
  */
 export class SubscriptionsUpdatePaymentFailedError extends Data.TaggedError("PaymentFailed")<{
   readonly status: 402;
@@ -216,7 +216,17 @@ export class SubscriptionsUpdatePaymentFailedError extends Data.TaggedError("Pay
 }> {}
 
 /**
- * Subscription is already canceled or will be at the end of the period, or is not active.
+ * The charge failed, or requires customer authentication that can't be completed off-session.
+ */
+export class SubscriptionsUpdatePaymentActionRequiredError extends Data.TaggedError(
+  "PaymentActionRequired",
+)<{
+  readonly status: 402;
+  readonly body: Models.PaymentActionRequired;
+}> {}
+
+/**
+ * Subscription is already canceled or will be at the end of the period, is not active, or the organization is not ready to renew subscriptions.
  */
 export class SubscriptionsUpdateAlreadyCanceledSubscriptionError extends Data.TaggedError(
   "AlreadyCanceledSubscription",
@@ -226,13 +236,21 @@ export class SubscriptionsUpdateAlreadyCanceledSubscriptionError extends Data.Ta
 }> {}
 
 /**
- * Subscription is already canceled or will be at the end of the period, or is not active.
+ * Subscription is already canceled or will be at the end of the period, is not active, or the organization is not ready to renew subscriptions.
  */
 export class SubscriptionsUpdateInactiveSubscriptionError extends Data.TaggedError(
   "InactiveSubscription",
 )<{
   readonly status: 403;
   readonly body: Models.InactiveSubscription;
+}> {}
+
+/**
+ * Subscription is already canceled or will be at the end of the period, is not active, or the organization is not ready to renew subscriptions.
+ */
+export class SubscriptionsUpdatePaymentNotReadyError extends Data.TaggedError("PaymentNotReady")<{
+  readonly status: 403;
+  readonly body: Models.PaymentNotReady;
 }> {}
 
 /**
@@ -275,8 +293,10 @@ export class SubscriptionsUpdateHTTPValidationError extends Data.TaggedError(
 
 export type SubscriptionsUpdateErrors =
   | SubscriptionsUpdatePaymentFailedError
+  | SubscriptionsUpdatePaymentActionRequiredError
   | SubscriptionsUpdateAlreadyCanceledSubscriptionError
   | SubscriptionsUpdateInactiveSubscriptionError
+  | SubscriptionsUpdatePaymentNotReadyError
   | SubscriptionsUpdateResourceNotFoundError
   | SubscriptionsUpdateSubscriptionLockedError
   | SubscriptionsUpdateSubscriptionNotScheduledToCancelError
@@ -663,6 +683,46 @@ export class ProductsGetHTTPValidationError extends Data.TaggedError("HTTPValida
 }> {}
 
 export type ProductsGetErrors = ProductsGetResourceNotFoundError | ProductsGetHTTPValidationError;
+
+/**
+ * You don't have the permission to delete this product.
+ */
+export class ProductsDeleteNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * Product not found.
+ */
+export class ProductsDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Product is in use and cannot be deleted.
+ */
+export class ProductsDeleteProductNotDeletableError extends Data.TaggedError(
+  "ProductNotDeletable",
+)<{
+  readonly status: 409;
+  readonly body: Models.ProductNotDeletable;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class ProductsDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type ProductsDeleteErrors =
+  | ProductsDeleteNotPermittedError
+  | ProductsDeleteResourceNotFoundError
+  | ProductsDeleteProductNotDeletableError
+  | ProductsDeleteHTTPValidationError;
 
 /**
  * You don't have the permission to update this product.
@@ -1088,6 +1148,14 @@ export class CheckoutsUpdateNotOpenCheckoutError extends Data.TaggedError("NotOp
 /**
  * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
  */
+export class CheckoutsUpdateNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
 export class CheckoutsUpdatePaymentNotReadyError extends Data.TaggedError("PaymentNotReady")<{
   readonly status: 403;
   readonly body: Models.PaymentNotReady;
@@ -1132,11 +1200,20 @@ export class CheckoutsUpdateHTTPValidationError extends Data.TaggedError("HTTPVa
 export type CheckoutsUpdateErrors =
   | CheckoutsUpdateAlreadyActiveSubscriptionError
   | CheckoutsUpdateNotOpenCheckoutError
+  | CheckoutsUpdateNotPermittedError
   | CheckoutsUpdatePaymentNotReadyError
   | CheckoutsUpdateTrialAlreadyRedeemedError
   | CheckoutsUpdateDiscountRedemptionLimitReachedError
   | CheckoutsUpdateResourceNotFoundError
   | CheckoutsUpdateHTTPValidationError;
+
+/**
+ * The organization is not allowed to accept payments.
+ */
+export class CheckoutsClientGetNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
 
 /**
  * Checkout session not found.
@@ -1165,6 +1242,7 @@ export class CheckoutsClientGetHTTPValidationError extends Data.TaggedError("HTT
 }> {}
 
 export type CheckoutsClientGetErrors =
+  | CheckoutsClientGetNotPermittedError
   | CheckoutsClientGetResourceNotFoundError
   | CheckoutsClientGetExpiredCheckoutError
   | CheckoutsClientGetHTTPValidationError;
@@ -1185,6 +1263,14 @@ export class CheckoutsClientUpdateAlreadyActiveSubscriptionError extends Data.Ta
 export class CheckoutsClientUpdateNotOpenCheckoutError extends Data.TaggedError("NotOpenCheckout")<{
   readonly status: 403;
   readonly body: Models.NotOpenCheckout;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientUpdateNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
 }> {}
 
 /**
@@ -1226,6 +1312,14 @@ export class CheckoutsClientUpdateResourceNotFoundError extends Data.TaggedError
 }> {}
 
 /**
+ * The checkout session is being processed.
+ */
+export class CheckoutsClientUpdateCheckoutLockedError extends Data.TaggedError("CheckoutLocked")<{
+  readonly status: 409;
+  readonly body: Models.CheckoutLocked;
+}> {}
+
+/**
  * The checkout session is expired.
  */
 export class CheckoutsClientUpdateExpiredCheckoutError extends Data.TaggedError(
@@ -1248,10 +1342,12 @@ export class CheckoutsClientUpdateHTTPValidationError extends Data.TaggedError(
 export type CheckoutsClientUpdateErrors =
   | CheckoutsClientUpdateAlreadyActiveSubscriptionError
   | CheckoutsClientUpdateNotOpenCheckoutError
+  | CheckoutsClientUpdateNotPermittedError
   | CheckoutsClientUpdatePaymentNotReadyError
   | CheckoutsClientUpdateTrialAlreadyRedeemedError
   | CheckoutsClientUpdateDiscountRedemptionLimitReachedError
   | CheckoutsClientUpdateResourceNotFoundError
+  | CheckoutsClientUpdateCheckoutLockedError
   | CheckoutsClientUpdateExpiredCheckoutError
   | CheckoutsClientUpdateHTTPValidationError;
 
@@ -1281,6 +1377,14 @@ export class CheckoutsClientConfirmNotOpenCheckoutError extends Data.TaggedError
 )<{
   readonly status: 403;
   readonly body: Models.NotOpenCheckout;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientConfirmNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
 }> {}
 
 /**
@@ -1324,6 +1428,14 @@ export class CheckoutsClientConfirmResourceNotFoundError extends Data.TaggedErro
 }> {}
 
 /**
+ * The checkout session is being processed.
+ */
+export class CheckoutsClientConfirmCheckoutLockedError extends Data.TaggedError("CheckoutLocked")<{
+  readonly status: 409;
+  readonly body: Models.CheckoutLocked;
+}> {}
+
+/**
  * The checkout session is expired.
  */
 export class CheckoutsClientConfirmExpiredCheckoutError extends Data.TaggedError(
@@ -1347,10 +1459,12 @@ export type CheckoutsClientConfirmErrors =
   | CheckoutsClientConfirmPaymentError
   | CheckoutsClientConfirmAlreadyActiveSubscriptionError
   | CheckoutsClientConfirmNotOpenCheckoutError
+  | CheckoutsClientConfirmNotPermittedError
   | CheckoutsClientConfirmPaymentNotReadyError
   | CheckoutsClientConfirmTrialAlreadyRedeemedError
   | CheckoutsClientConfirmDiscountRedemptionLimitReachedError
   | CheckoutsClientConfirmResourceNotFoundError
+  | CheckoutsClientConfirmCheckoutLockedError
   | CheckoutsClientConfirmExpiredCheckoutError
   | CheckoutsClientConfirmHTTPValidationError;
 
@@ -1706,11 +1820,11 @@ export type LicenseKeysGetActivationErrors =
  */
 export class LicenseKeysValidateBadRequestError extends Data.TaggedError("BadRequest")<{
   readonly status: 400;
-  readonly body: unknown;
+  readonly body: Models.BadRequest;
 }> {}
 
 /**
- * License key not found, revoked, disabled, or expired, or the supplied activation, conditions, benefit, or customer do not match.
+ * License key not found, revoked, disabled, or expired, or the supplied activation is missing or does not match, or the conditions, benefit, or customer do not match.
  */
 export class LicenseKeysValidateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
   readonly status: 404;
@@ -3199,11 +3313,11 @@ export class CustomerPortalLicenseKeysValidateBadRequestError extends Data.Tagge
   "BadRequest",
 )<{
   readonly status: 400;
-  readonly body: unknown;
+  readonly body: Models.BadRequest;
 }> {}
 
 /**
- * License key not found, revoked, disabled, or expired, or the supplied activation, conditions, benefit, or customer do not match.
+ * License key not found, revoked, disabled, or expired, or the supplied activation is missing or does not match, or the conditions, benefit, or customer do not match.
  */
 export class CustomerPortalLicenseKeysValidateResourceNotFoundError extends Data.TaggedError(
   "ResourceNotFound",
