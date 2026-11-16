@@ -15,16 +15,16 @@ import * as Models from "../models";
  * **Scopes**: `events:read` `events:write`
  */
 export const list = (query?: {
+  readonly organization_id?: string | ReadonlyArray<string> | null;
+  readonly query?: string | null;
   readonly filter?: string | null;
   readonly start_timestamp?: (DateTime.Utc | string) | null;
   readonly end_timestamp?: (DateTime.Utc | string) | null;
-  readonly organization_id?: string | ReadonlyArray<string> | null;
   readonly customer_id?: string | ReadonlyArray<string> | null;
   readonly external_customer_id?: string | ReadonlyArray<string> | null;
   readonly meter_id?: string | null;
   readonly name?: string | ReadonlyArray<string> | null;
   readonly source?: Models.EventSource | ReadonlyArray<Models.EventSource> | null;
-  readonly query?: string | null;
   readonly parent_id?: string | null;
   readonly depth?: number | null;
   readonly page?: number;

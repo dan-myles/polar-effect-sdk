@@ -5,2600 +5,50 @@ import type * as Models from "./models";
 /**
  * Validation Error
  */
-export class OrganizationsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+export class EventsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
   readonly status: 422;
   readonly body: Models.HTTPValidationError;
 }> {}
 
-export type OrganizationsListErrors = OrganizationsListHTTPValidationError;
+export type EventsListErrors = EventsListHTTPValidationError;
 
 /**
- * Forbidden
- */
-export class OrganizationsCreateCannotCreateOrganizationError extends Data.TaggedError(
-  "CannotCreateOrganizationError",
-)<{
-  readonly status: 403;
-  readonly body: Models.CannotCreateOrganizationError;
-}> {}
-
-/**
- * Validation Error
- */
-export class OrganizationsCreateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type OrganizationsCreateErrors =
-  | OrganizationsCreateCannotCreateOrganizationError
-  | OrganizationsCreateHTTPValidationError;
-
-/**
- * Organization not found.
- */
-export class OrganizationsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class OrganizationsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type OrganizationsGetErrors =
-  | OrganizationsGetResourceNotFoundError
-  | OrganizationsGetHTTPValidationError;
-
-/**
- * You don't have the permission to update this organization, or dispute auto-accept isn't enabled for it.
- */
-export class OrganizationsUpdateNotPermittedError extends Data.TaggedError("NotPermitted")<{
-  readonly status: 403;
-  readonly body: Models.NotPermitted;
-}> {}
-
-/**
- * You don't have the permission to update this organization, or dispute auto-accept isn't enabled for it.
- */
-export class OrganizationsUpdateDisputeAutoAcceptNotEnabledError extends Data.TaggedError(
-  "DisputeAutoAcceptNotEnabled",
-)<{
-  readonly status: 403;
-  readonly body: Models.DisputeAutoAcceptNotEnabled;
-}> {}
-
-/**
- * Organization not found.
- */
-export class OrganizationsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Cannot enforce SSO without an enabled connection.
- */
-export class OrganizationsUpdateSSOEnforcementRequiresConnectionError extends Data.TaggedError(
-  "SSOEnforcementRequiresConnection",
-)<{
-  readonly status: 409;
-  readonly body: Models.SSOEnforcementRequiresConnection;
-}> {}
-
-/**
- * Validation Error
- */
-export class OrganizationsUpdateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type OrganizationsUpdateErrors =
-  | OrganizationsUpdateNotPermittedError
-  | OrganizationsUpdateDisputeAutoAcceptNotEnabledError
-  | OrganizationsUpdateResourceNotFoundError
-  | OrganizationsUpdateSSOEnforcementRequiresConnectionError
-  | OrganizationsUpdateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class SubscriptionsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type SubscriptionsListErrors = SubscriptionsListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class SubscriptionsCreateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type SubscriptionsCreateErrors = SubscriptionsCreateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class SubscriptionsExportHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type SubscriptionsExportErrors = SubscriptionsExportHTTPValidationError;
-
-/**
- * Subscription not found.
- */
-export class SubscriptionsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class SubscriptionsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type SubscriptionsGetErrors =
-  | SubscriptionsGetResourceNotFoundError
-  | SubscriptionsGetHTTPValidationError;
-
-/**
- * This subscription is already revoked.
- */
-export class SubscriptionsRevokeAlreadyCanceledSubscriptionError extends Data.TaggedError(
-  "AlreadyCanceledSubscription",
-)<{
-  readonly status: 403;
-  readonly body: Models.AlreadyCanceledSubscription;
-}> {}
-
-/**
- * Subscription not found.
- */
-export class SubscriptionsRevokeResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Subscription is pending an update.
- */
-export class SubscriptionsRevokeSubscriptionLockedError extends Data.TaggedError(
-  "SubscriptionLocked",
-)<{
-  readonly status: 409;
-  readonly body: Models.SubscriptionLocked;
-}> {}
-
-/**
- * Validation Error
- */
-export class SubscriptionsRevokeHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type SubscriptionsRevokeErrors =
-  | SubscriptionsRevokeAlreadyCanceledSubscriptionError
-  | SubscriptionsRevokeResourceNotFoundError
-  | SubscriptionsRevokeSubscriptionLockedError
-  | SubscriptionsRevokeHTTPValidationError;
-
-/**
- * Payment required to apply the subscription update.
- */
-export class SubscriptionsUpdatePaymentFailedError extends Data.TaggedError("PaymentFailed")<{
-  readonly status: 402;
-  readonly body: Models.PaymentFailed;
-}> {}
-
-/**
- * Subscription is already canceled or will be at the end of the period, or is not active.
- */
-export class SubscriptionsUpdateAlreadyCanceledSubscriptionError extends Data.TaggedError(
-  "AlreadyCanceledSubscription",
-)<{
-  readonly status: 403;
-  readonly body: Models.AlreadyCanceledSubscription;
-}> {}
-
-/**
- * Subscription is already canceled or will be at the end of the period, or is not active.
- */
-export class SubscriptionsUpdateInactiveSubscriptionError extends Data.TaggedError(
-  "InactiveSubscription",
-)<{
-  readonly status: 403;
-  readonly body: Models.InactiveSubscription;
-}> {}
-
-/**
- * Subscription not found.
- */
-export class SubscriptionsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Subscription is pending an update, or is not scheduled to be canceled.
- */
-export class SubscriptionsUpdateSubscriptionLockedError extends Data.TaggedError(
-  "SubscriptionLocked",
-)<{
-  readonly status: 409;
-  readonly body: Models.SubscriptionLocked;
-}> {}
-
-/**
- * Subscription is pending an update, or is not scheduled to be canceled.
- */
-export class SubscriptionsUpdateSubscriptionNotScheduledToCancelError extends Data.TaggedError(
-  "SubscriptionNotScheduledToCancel",
-)<{
-  readonly status: 409;
-  readonly body: Models.SubscriptionNotScheduledToCancel;
-}> {}
-
-/**
- * Validation Error
- */
-export class SubscriptionsUpdateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type SubscriptionsUpdateErrors =
-  | SubscriptionsUpdatePaymentFailedError
-  | SubscriptionsUpdateAlreadyCanceledSubscriptionError
-  | SubscriptionsUpdateInactiveSubscriptionError
-  | SubscriptionsUpdateResourceNotFoundError
-  | SubscriptionsUpdateSubscriptionLockedError
-  | SubscriptionsUpdateSubscriptionNotScheduledToCancelError
-  | SubscriptionsUpdateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class Oauth2ClientsOauth2CreateClientHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type Oauth2ClientsOauth2CreateClientErrors =
-  Oauth2ClientsOauth2CreateClientHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class Oauth2ClientsOauth2GetClientHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type Oauth2ClientsOauth2GetClientErrors = Oauth2ClientsOauth2GetClientHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class Oauth2ClientsOauth2UpdateClientHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type Oauth2ClientsOauth2UpdateClientErrors =
-  Oauth2ClientsOauth2UpdateClientHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class Oauth2ClientsOauth2DeleteClientHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type Oauth2ClientsOauth2DeleteClientErrors =
-  Oauth2ClientsOauth2DeleteClientHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class BenefitsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type BenefitsListErrors = BenefitsListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class BenefitsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type BenefitsCreateErrors = BenefitsCreateHTTPValidationError;
-
-/**
- * Benefit not found.
- */
-export class BenefitsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class BenefitsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type BenefitsGetErrors = BenefitsGetResourceNotFoundError | BenefitsGetHTTPValidationError;
-
-/**
- * This benefit is not deletable.
- */
-export class BenefitsDeleteNotPermittedError extends Data.TaggedError("NotPermitted")<{
-  readonly status: 403;
-  readonly body: Models.NotPermitted;
-}> {}
-
-/**
- * Benefit not found.
- */
-export class BenefitsDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class BenefitsDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type BenefitsDeleteErrors =
-  | BenefitsDeleteNotPermittedError
-  | BenefitsDeleteResourceNotFoundError
-  | BenefitsDeleteHTTPValidationError;
-
-/**
- * Benefit not found.
- */
-export class BenefitsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class BenefitsUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type BenefitsUpdateErrors =
-  | BenefitsUpdateResourceNotFoundError
-  | BenefitsUpdateHTTPValidationError;
-
-/**
- * Benefit not found.
- */
-export class BenefitsFilesResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class BenefitsFilesHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type BenefitsFilesErrors =
-  | BenefitsFilesResourceNotFoundError
-  | BenefitsFilesHTTPValidationError;
-
-/**
- * Benefit not found.
- */
-export class BenefitsGrantsResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class BenefitsGrantsHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type BenefitsGrantsErrors =
-  | BenefitsGrantsResourceNotFoundError
-  | BenefitsGrantsHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class BenefitGrantsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type BenefitGrantsListErrors = BenefitGrantsListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class WebhooksListWebhookEndpointsHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type WebhooksListWebhookEndpointsErrors = WebhooksListWebhookEndpointsHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class WebhooksCreateWebhookEndpointHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type WebhooksCreateWebhookEndpointErrors = WebhooksCreateWebhookEndpointHTTPValidationError;
-
-/**
- * Webhook endpoint not found.
- */
-export class WebhooksGetWebhookEndpointResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class WebhooksGetWebhookEndpointHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type WebhooksGetWebhookEndpointErrors =
-  | WebhooksGetWebhookEndpointResourceNotFoundError
-  | WebhooksGetWebhookEndpointHTTPValidationError;
-
-/**
- * Webhook endpoint not found.
- */
-export class WebhooksDeleteWebhookEndpointResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class WebhooksDeleteWebhookEndpointHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type WebhooksDeleteWebhookEndpointErrors =
-  | WebhooksDeleteWebhookEndpointResourceNotFoundError
-  | WebhooksDeleteWebhookEndpointHTTPValidationError;
-
-/**
- * Webhook endpoint not found.
- */
-export class WebhooksUpdateWebhookEndpointResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class WebhooksUpdateWebhookEndpointHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type WebhooksUpdateWebhookEndpointErrors =
-  | WebhooksUpdateWebhookEndpointResourceNotFoundError
-  | WebhooksUpdateWebhookEndpointHTTPValidationError;
-
-/**
- * Webhook endpoint not found.
- */
-export class WebhooksResetWebhookEndpointSecretResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class WebhooksResetWebhookEndpointSecretHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type WebhooksResetWebhookEndpointSecretErrors =
-  | WebhooksResetWebhookEndpointSecretResourceNotFoundError
-  | WebhooksResetWebhookEndpointSecretHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class WebhooksListWebhookDeliveriesHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type WebhooksListWebhookDeliveriesErrors = WebhooksListWebhookDeliveriesHTTPValidationError;
-
-/**
- * Webhook event not found.
- */
-export class WebhooksRedeliverWebhookEventResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class WebhooksRedeliverWebhookEventHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type WebhooksRedeliverWebhookEventErrors =
-  | WebhooksRedeliverWebhookEventResourceNotFoundError
-  | WebhooksRedeliverWebhookEventHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class ProductsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type ProductsListErrors = ProductsListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class ProductsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type ProductsCreateErrors = ProductsCreateHTTPValidationError;
-
-/**
- * Product not found.
- */
-export class ProductsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class ProductsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type ProductsGetErrors = ProductsGetResourceNotFoundError | ProductsGetHTTPValidationError;
-
-/**
- * You don't have the permission to update this product.
- */
-export class ProductsUpdateNotPermittedError extends Data.TaggedError("NotPermitted")<{
-  readonly status: 403;
-  readonly body: Models.NotPermitted;
-}> {}
-
-/**
- * Product not found.
- */
-export class ProductsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class ProductsUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type ProductsUpdateErrors =
-  | ProductsUpdateNotPermittedError
-  | ProductsUpdateResourceNotFoundError
-  | ProductsUpdateHTTPValidationError;
-
-/**
- * You don't have the permission to update this product.
- */
-export class ProductsUpdateBenefitsNotPermittedError extends Data.TaggedError("NotPermitted")<{
-  readonly status: 403;
-  readonly body: Models.NotPermitted;
-}> {}
-
-/**
- * Product not found.
- */
-export class ProductsUpdateBenefitsResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class ProductsUpdateBenefitsHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type ProductsUpdateBenefitsErrors =
-  | ProductsUpdateBenefitsNotPermittedError
-  | ProductsUpdateBenefitsResourceNotFoundError
-  | ProductsUpdateBenefitsHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class OrdersListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type OrdersListErrors = OrdersListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class OrdersCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type OrdersCreateErrors = OrdersCreateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class OrdersExportHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type OrdersExportErrors = OrdersExportHTTPValidationError;
-
-/**
- * Order not found.
- */
-export class OrdersGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class OrdersGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type OrdersGetErrors = OrdersGetResourceNotFoundError | OrdersGetHTTPValidationError;
-
-/**
- * Order not found.
- */
-export class OrdersUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class OrdersUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type OrdersUpdateErrors =
-  | OrdersUpdateResourceNotFoundError
-  | OrdersUpdateHTTPValidationError;
-
-/**
- * The charge failed, or requires customer authentication (e.g. a 3DS challenge) that can't be completed off-session.
- */
-export class OrdersFinalizePaymentFailedError extends Data.TaggedError("PaymentFailed")<{
-  readonly status: 402;
-  readonly body: Models.PaymentFailed;
-}> {}
-
-/**
- * The charge failed, or requires customer authentication (e.g. a 3DS challenge) that can't be completed off-session.
- */
-export class OrdersFinalizePaymentActionRequiredError extends Data.TaggedError(
-  "PaymentActionRequired",
-)<{
-  readonly status: 402;
-  readonly body: Models.PaymentActionRequired;
-}> {}
-
-/**
- * Off-session charges are not enabled for this organization, or its account can't currently accept payments.
- */
-export class OrdersFinalizeOffSessionChargesNotEnabledError extends Data.TaggedError(
-  "OffSessionChargesNotEnabled",
-)<{
-  readonly status: 403;
-  readonly body: Models.OffSessionChargesNotEnabled;
-}> {}
-
-/**
- * Off-session charges are not enabled for this organization, or its account can't currently accept payments.
- */
-export class OrdersFinalizeOrganizationNotReadyForPaymentsError extends Data.TaggedError(
-  "OrganizationNotReadyForPayments",
-)<{
-  readonly status: 403;
-  readonly body: Models.OrganizationNotReadyForPayments;
-}> {}
-
-/**
- * Order not found.
- */
-export class OrdersFinalizeResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * The order is not in `draft` status.
- */
-export class OrdersFinalizeOrderNotDraftError extends Data.TaggedError("OrderNotDraft")<{
-  readonly status: 412;
-  readonly body: Models.OrderNotDraft;
-}> {}
-
-/**
- * Validation Error
- */
-export class OrdersFinalizeHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type OrdersFinalizeErrors =
-  | OrdersFinalizePaymentFailedError
-  | OrdersFinalizePaymentActionRequiredError
-  | OrdersFinalizeOffSessionChargesNotEnabledError
-  | OrdersFinalizeOrganizationNotReadyForPaymentsError
-  | OrdersFinalizeResourceNotFoundError
-  | OrdersFinalizeOrderNotDraftError
-  | OrdersFinalizeHTTPValidationError;
-
-/**
- * Order not found.
- */
-export class OrdersInvoiceResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class OrdersInvoiceHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type OrdersInvoiceErrors =
-  | OrdersInvoiceResourceNotFoundError
-  | OrdersInvoiceHTTPValidationError;
-
-/**
- * Order not found.
- */
-export class OrdersGenerateInvoiceResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Order is not eligible for invoice generation (invalid status).
- */
-export class OrdersGenerateInvoiceOrderNotEligibleForInvoiceError extends Data.TaggedError(
-  "OrderNotEligibleForInvoice",
-)<{
-  readonly status: 409;
-  readonly body: Models.OrderNotEligibleForInvoice;
-}> {}
-
-/**
- * Order is missing billing name or address.
- */
-export class OrdersGenerateInvoiceMissingInvoiceBillingDetailsError extends Data.TaggedError(
-  "MissingInvoiceBillingDetails",
-)<{
-  readonly status: 422;
-  readonly body: Models.MissingInvoiceBillingDetails;
-}> {}
-
-export type OrdersGenerateInvoiceErrors =
-  | OrdersGenerateInvoiceResourceNotFoundError
-  | OrdersGenerateInvoiceOrderNotEligibleForInvoiceError
-  | OrdersGenerateInvoiceMissingInvoiceBillingDetailsError;
-
-/**
- * Order not found.
- */
-export class OrdersReceiptResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class OrdersReceiptHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type OrdersReceiptErrors =
-  | OrdersReceiptResourceNotFoundError
-  | OrdersReceiptHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class RefundsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type RefundsListErrors = RefundsListHTTPValidationError;
-
-/**
- * Order is already fully refunded.
- */
-export class RefundsCreateRefundedAlreadyError extends Data.TaggedError("RefundedAlready")<{
-  readonly status: 403;
-  readonly body: Models.RefundedAlready;
-}> {}
-
-/**
- * Validation Error
- */
-export class RefundsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type RefundsCreateErrors =
-  | RefundsCreateRefundedAlreadyError
-  | RefundsCreateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class DisputesListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type DisputesListErrors = DisputesListHTTPValidationError;
-
-/**
- * Dispute not found.
- */
-export class DisputesGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class DisputesGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type DisputesGetErrors = DisputesGetResourceNotFoundError | DisputesGetHTTPValidationError;
-
-/**
- * Dispute not found.
- */
-export class DisputesAcceptResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Conflict
- */
-export class DisputesAcceptDisputeNotOpenError extends Data.TaggedError("DisputeNotOpenError")<{
-  readonly status: 409;
-  readonly body: Models.DisputeNotOpenError;
-}> {}
-
-/**
- * Validation Error
- */
-export class DisputesAcceptHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type DisputesAcceptErrors =
-  | DisputesAcceptResourceNotFoundError
-  | DisputesAcceptDisputeNotOpenError
-  | DisputesAcceptHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class CheckoutsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutsListErrors = CheckoutsListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class CheckoutsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutsCreateErrors = CheckoutsCreateHTTPValidationError;
-
-/**
- * Checkout session not found.
- */
-export class CheckoutsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CheckoutsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutsGetErrors =
-  | CheckoutsGetResourceNotFoundError
-  | CheckoutsGetHTTPValidationError;
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsUpdateAlreadyActiveSubscriptionError extends Data.TaggedError(
-  "AlreadyActiveSubscriptionError",
-)<{
-  readonly status: 403;
-  readonly body: Models.AlreadyActiveSubscriptionError;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsUpdateNotOpenCheckoutError extends Data.TaggedError("NotOpenCheckout")<{
-  readonly status: 403;
-  readonly body: Models.NotOpenCheckout;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsUpdatePaymentNotReadyError extends Data.TaggedError("PaymentNotReady")<{
-  readonly status: 403;
-  readonly body: Models.PaymentNotReady;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsUpdateTrialAlreadyRedeemedError extends Data.TaggedError(
-  "TrialAlreadyRedeemed",
-)<{
-  readonly status: 403;
-  readonly body: Models.TrialAlreadyRedeemed;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsUpdateDiscountRedemptionLimitReachedError extends Data.TaggedError(
-  "DiscountRedemptionLimitReached",
-)<{
-  readonly status: 403;
-  readonly body: Models.DiscountRedemptionLimitReached;
-}> {}
-
-/**
- * Checkout session not found.
- */
-export class CheckoutsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CheckoutsUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutsUpdateErrors =
-  | CheckoutsUpdateAlreadyActiveSubscriptionError
-  | CheckoutsUpdateNotOpenCheckoutError
-  | CheckoutsUpdatePaymentNotReadyError
-  | CheckoutsUpdateTrialAlreadyRedeemedError
-  | CheckoutsUpdateDiscountRedemptionLimitReachedError
-  | CheckoutsUpdateResourceNotFoundError
-  | CheckoutsUpdateHTTPValidationError;
-
-/**
- * Checkout session not found.
- */
-export class CheckoutsClientGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * The checkout session is expired.
- */
-export class CheckoutsClientGetExpiredCheckoutError extends Data.TaggedError(
-  "ExpiredCheckoutError",
-)<{
-  readonly status: 410;
-  readonly body: Models.ExpiredCheckoutError;
-}> {}
-
-/**
- * Validation Error
- */
-export class CheckoutsClientGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutsClientGetErrors =
-  | CheckoutsClientGetResourceNotFoundError
-  | CheckoutsClientGetExpiredCheckoutError
-  | CheckoutsClientGetHTTPValidationError;
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsClientUpdateAlreadyActiveSubscriptionError extends Data.TaggedError(
-  "AlreadyActiveSubscriptionError",
-)<{
-  readonly status: 403;
-  readonly body: Models.AlreadyActiveSubscriptionError;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsClientUpdateNotOpenCheckoutError extends Data.TaggedError("NotOpenCheckout")<{
-  readonly status: 403;
-  readonly body: Models.NotOpenCheckout;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsClientUpdatePaymentNotReadyError extends Data.TaggedError("PaymentNotReady")<{
-  readonly status: 403;
-  readonly body: Models.PaymentNotReady;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsClientUpdateTrialAlreadyRedeemedError extends Data.TaggedError(
-  "TrialAlreadyRedeemed",
-)<{
-  readonly status: 403;
-  readonly body: Models.TrialAlreadyRedeemed;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsClientUpdateDiscountRedemptionLimitReachedError extends Data.TaggedError(
-  "DiscountRedemptionLimitReached",
-)<{
-  readonly status: 403;
-  readonly body: Models.DiscountRedemptionLimitReached;
-}> {}
-
-/**
- * Checkout session not found.
- */
-export class CheckoutsClientUpdateResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * The checkout session is expired.
- */
-export class CheckoutsClientUpdateExpiredCheckoutError extends Data.TaggedError(
-  "ExpiredCheckoutError",
-)<{
-  readonly status: 410;
-  readonly body: Models.ExpiredCheckoutError;
-}> {}
-
-/**
- * Validation Error
- */
-export class CheckoutsClientUpdateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutsClientUpdateErrors =
-  | CheckoutsClientUpdateAlreadyActiveSubscriptionError
-  | CheckoutsClientUpdateNotOpenCheckoutError
-  | CheckoutsClientUpdatePaymentNotReadyError
-  | CheckoutsClientUpdateTrialAlreadyRedeemedError
-  | CheckoutsClientUpdateDiscountRedemptionLimitReachedError
-  | CheckoutsClientUpdateResourceNotFoundError
-  | CheckoutsClientUpdateExpiredCheckoutError
-  | CheckoutsClientUpdateHTTPValidationError;
-
-/**
- * The payment failed.
- */
-export class CheckoutsClientConfirmPaymentError extends Data.TaggedError("PaymentError")<{
-  readonly status: 400;
-  readonly body: Models.PaymentError;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsClientConfirmAlreadyActiveSubscriptionError extends Data.TaggedError(
-  "AlreadyActiveSubscriptionError",
-)<{
-  readonly status: 403;
-  readonly body: Models.AlreadyActiveSubscriptionError;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsClientConfirmNotOpenCheckoutError extends Data.TaggedError(
-  "NotOpenCheckout",
-)<{
-  readonly status: 403;
-  readonly body: Models.NotOpenCheckout;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsClientConfirmPaymentNotReadyError extends Data.TaggedError(
-  "PaymentNotReady",
-)<{
-  readonly status: 403;
-  readonly body: Models.PaymentNotReady;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsClientConfirmTrialAlreadyRedeemedError extends Data.TaggedError(
-  "TrialAlreadyRedeemed",
-)<{
-  readonly status: 403;
-  readonly body: Models.TrialAlreadyRedeemed;
-}> {}
-
-/**
- * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
- */
-export class CheckoutsClientConfirmDiscountRedemptionLimitReachedError extends Data.TaggedError(
-  "DiscountRedemptionLimitReached",
-)<{
-  readonly status: 403;
-  readonly body: Models.DiscountRedemptionLimitReached;
-}> {}
-
-/**
- * Checkout session not found.
- */
-export class CheckoutsClientConfirmResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * The checkout session is expired.
- */
-export class CheckoutsClientConfirmExpiredCheckoutError extends Data.TaggedError(
-  "ExpiredCheckoutError",
-)<{
-  readonly status: 410;
-  readonly body: Models.ExpiredCheckoutError;
-}> {}
-
-/**
- * Validation Error
- */
-export class CheckoutsClientConfirmHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutsClientConfirmErrors =
-  | CheckoutsClientConfirmPaymentError
-  | CheckoutsClientConfirmAlreadyActiveSubscriptionError
-  | CheckoutsClientConfirmNotOpenCheckoutError
-  | CheckoutsClientConfirmPaymentNotReadyError
-  | CheckoutsClientConfirmTrialAlreadyRedeemedError
-  | CheckoutsClientConfirmDiscountRedemptionLimitReachedError
-  | CheckoutsClientConfirmResourceNotFoundError
-  | CheckoutsClientConfirmExpiredCheckoutError
-  | CheckoutsClientConfirmHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class FilesListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type FilesListErrors = FilesListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class FilesCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type FilesCreateErrors = FilesCreateHTTPValidationError;
-
-/**
- * You don't have the permission to update this file.
- */
-export class FilesUploadedNotPermittedError extends Data.TaggedError("NotPermitted")<{
-  readonly status: 403;
-  readonly body: Models.NotPermitted;
-}> {}
-
-/**
- * File not found.
- */
-export class FilesUploadedResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class FilesUploadedHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type FilesUploadedErrors =
-  | FilesUploadedNotPermittedError
-  | FilesUploadedResourceNotFoundError
-  | FilesUploadedHTTPValidationError;
-
-/**
- * You don't have the permission to delete this file.
- */
-export class FilesDeleteNotPermittedError extends Data.TaggedError("NotPermitted")<{
-  readonly status: 403;
-  readonly body: Models.NotPermitted;
-}> {}
-
-/**
- * File not found.
- */
-export class FilesDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class FilesDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type FilesDeleteErrors =
-  | FilesDeleteNotPermittedError
-  | FilesDeleteResourceNotFoundError
-  | FilesDeleteHTTPValidationError;
-
-/**
- * You don't have the permission to update this file.
- */
-export class FilesUpdateNotPermittedError extends Data.TaggedError("NotPermitted")<{
-  readonly status: 403;
-  readonly body: Models.NotPermitted;
-}> {}
-
-/**
- * File not found.
- */
-export class FilesUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class FilesUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type FilesUpdateErrors =
-  | FilesUpdateNotPermittedError
-  | FilesUpdateResourceNotFoundError
-  | FilesUpdateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class MetricsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetricsGetErrors = MetricsGetHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class MetricsExportHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetricsExportErrors = MetricsExportHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class MetricsListDashboardsHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetricsListDashboardsErrors = MetricsListDashboardsHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class MetricsCreateDashboardHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetricsCreateDashboardErrors = MetricsCreateDashboardHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class MetricsGetDashboardHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetricsGetDashboardErrors = MetricsGetDashboardHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class MetricsDeleteDashboardHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetricsDeleteDashboardErrors = MetricsDeleteDashboardHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class MetricsUpdateDashboardHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetricsUpdateDashboardErrors = MetricsUpdateDashboardHTTPValidationError;
-
-/**
- * Not authorized to manage license key.
- */
-export class LicenseKeysListUnauthorizedError extends Data.TaggedError("Unauthorized")<{
-  readonly status: 401;
-  readonly body: Models.Unauthorized;
-}> {}
-
-/**
- * License key not found.
- */
-export class LicenseKeysListResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class LicenseKeysListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type LicenseKeysListErrors =
-  | LicenseKeysListUnauthorizedError
-  | LicenseKeysListResourceNotFoundError
-  | LicenseKeysListHTTPValidationError;
-
-/**
- * Not authorized to manage license key.
- */
-export class LicenseKeysGetUnauthorizedError extends Data.TaggedError("Unauthorized")<{
-  readonly status: 401;
-  readonly body: Models.Unauthorized;
-}> {}
-
-/**
- * License key not found.
- */
-export class LicenseKeysGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class LicenseKeysGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type LicenseKeysGetErrors =
-  | LicenseKeysGetUnauthorizedError
-  | LicenseKeysGetResourceNotFoundError
-  | LicenseKeysGetHTTPValidationError;
-
-/**
- * Not authorized to manage license key.
- */
-export class LicenseKeysUpdateUnauthorizedError extends Data.TaggedError("Unauthorized")<{
-  readonly status: 401;
-  readonly body: Models.Unauthorized;
-}> {}
-
-/**
- * License key not found.
- */
-export class LicenseKeysUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class LicenseKeysUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type LicenseKeysUpdateErrors =
-  | LicenseKeysUpdateUnauthorizedError
-  | LicenseKeysUpdateResourceNotFoundError
-  | LicenseKeysUpdateHTTPValidationError;
-
-/**
- * License key cannot be rotated in its current status. Allowed statuses: disabled, granted.
- */
-export class LicenseKeysRotateRotateNotPermittedError extends Data.TaggedError(
-  "RotateNotPermitted",
-)<{
-  readonly status: 400;
-  readonly body: Models.RotateNotPermitted;
-}> {}
-
-/**
- * Not authorized to manage license key.
- */
-export class LicenseKeysRotateUnauthorizedError extends Data.TaggedError("Unauthorized")<{
-  readonly status: 401;
-  readonly body: Models.Unauthorized;
-}> {}
-
-/**
- * License key not found.
- */
-export class LicenseKeysRotateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class LicenseKeysRotateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type LicenseKeysRotateErrors =
-  | LicenseKeysRotateRotateNotPermittedError
-  | LicenseKeysRotateUnauthorizedError
-  | LicenseKeysRotateResourceNotFoundError
-  | LicenseKeysRotateHTTPValidationError;
-
-/**
- * Not authorized to manage license key.
- */
-export class LicenseKeysGetActivationUnauthorizedError extends Data.TaggedError("Unauthorized")<{
-  readonly status: 401;
-  readonly body: Models.Unauthorized;
-}> {}
-
-/**
- * License key or activation not found, or activation does not belong to the license key.
- */
-export class LicenseKeysGetActivationResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class LicenseKeysGetActivationHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type LicenseKeysGetActivationErrors =
-  | LicenseKeysGetActivationUnauthorizedError
-  | LicenseKeysGetActivationResourceNotFoundError
-  | LicenseKeysGetActivationHTTPValidationError;
-
-/**
- * The requested usage increment exceeds the license key's remaining usage allowance.
- */
-export class LicenseKeysValidateBadRequestError extends Data.TaggedError("BadRequest")<{
-  readonly status: 400;
-  readonly body: unknown;
-}> {}
-
-/**
- * License key not found, revoked, disabled, or expired, or the supplied activation, conditions, benefit, or customer do not match.
- */
-export class LicenseKeysValidateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class LicenseKeysValidateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type LicenseKeysValidateErrors =
-  | LicenseKeysValidateBadRequestError
-  | LicenseKeysValidateResourceNotFoundError
-  | LicenseKeysValidateHTTPValidationError;
-
-/**
- * License key is revoked, disabled, or expired, does not support activations, or has reached its activation limit. Use /validate for licenses without activations.
- */
-export class LicenseKeysActivateNotPermittedError extends Data.TaggedError("NotPermitted")<{
-  readonly status: 403;
-  readonly body: Models.NotPermitted;
-}> {}
-
-/**
- * License key not found.
- */
-export class LicenseKeysActivateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class LicenseKeysActivateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type LicenseKeysActivateErrors =
-  | LicenseKeysActivateNotPermittedError
-  | LicenseKeysActivateResourceNotFoundError
-  | LicenseKeysActivateHTTPValidationError;
-
-/**
- * License key or activation not found, or activation does not belong to the license key.
- */
-export class LicenseKeysDeactivateResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class LicenseKeysDeactivateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type LicenseKeysDeactivateErrors =
-  | LicenseKeysDeactivateResourceNotFoundError
-  | LicenseKeysDeactivateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class CheckoutLinksListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutLinksListErrors = CheckoutLinksListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class CheckoutLinksCreateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutLinksCreateErrors = CheckoutLinksCreateHTTPValidationError;
-
-/**
- * Checkout link not found.
- */
-export class CheckoutLinksGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CheckoutLinksGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutLinksGetErrors =
-  | CheckoutLinksGetResourceNotFoundError
-  | CheckoutLinksGetHTTPValidationError;
-
-/**
- * Checkout link not found.
- */
-export class CheckoutLinksDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CheckoutLinksDeleteHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutLinksDeleteErrors =
-  | CheckoutLinksDeleteResourceNotFoundError
-  | CheckoutLinksDeleteHTTPValidationError;
-
-/**
- * Checkout link not found.
- */
-export class CheckoutLinksUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CheckoutLinksUpdateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CheckoutLinksUpdateErrors =
-  | CheckoutLinksUpdateResourceNotFoundError
-  | CheckoutLinksUpdateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class CustomFieldsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomFieldsListErrors = CustomFieldsListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class CustomFieldsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomFieldsCreateErrors = CustomFieldsCreateHTTPValidationError;
-
-/**
- * Custom field not found.
- */
-export class CustomFieldsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomFieldsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomFieldsGetErrors =
-  | CustomFieldsGetResourceNotFoundError
-  | CustomFieldsGetHTTPValidationError;
-
-/**
- * Custom field not found.
- */
-export class CustomFieldsDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomFieldsDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomFieldsDeleteErrors =
-  | CustomFieldsDeleteResourceNotFoundError
-  | CustomFieldsDeleteHTTPValidationError;
-
-/**
- * Custom field not found.
- */
-export class CustomFieldsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomFieldsUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomFieldsUpdateErrors =
-  | CustomFieldsUpdateResourceNotFoundError
-  | CustomFieldsUpdateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class DiscountsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type DiscountsListErrors = DiscountsListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class DiscountsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type DiscountsCreateErrors = DiscountsCreateHTTPValidationError;
-
-/**
- * Discount not found.
- */
-export class DiscountsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class DiscountsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type DiscountsGetErrors =
-  | DiscountsGetResourceNotFoundError
-  | DiscountsGetHTTPValidationError;
-
-/**
- * Discount not found.
- */
-export class DiscountsDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class DiscountsDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type DiscountsDeleteErrors =
-  | DiscountsDeleteResourceNotFoundError
-  | DiscountsDeleteHTTPValidationError;
-
-/**
- * Discount not found.
- */
-export class DiscountsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class DiscountsUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type DiscountsUpdateErrors =
-  | DiscountsUpdateResourceNotFoundError
-  | DiscountsUpdateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class CustomersListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersListErrors = CustomersListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class CustomersCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersCreateErrors = CustomersCreateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class CustomersExportHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersExportErrors = CustomersExportHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersGetErrors =
-  | CustomersGetResourceNotFoundError
-  | CustomersGetHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersDeleteErrors =
-  | CustomersDeleteResourceNotFoundError
-  | CustomersDeleteHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersUpdateErrors =
-  | CustomersUpdateResourceNotFoundError
-  | CustomersUpdateHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersGetExternalResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersGetExternalHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersGetExternalErrors =
-  | CustomersGetExternalResourceNotFoundError
-  | CustomersGetExternalHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersDeleteExternalResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersDeleteExternalHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersDeleteExternalErrors =
-  | CustomersDeleteExternalResourceNotFoundError
-  | CustomersDeleteExternalHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersUpdateExternalResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersUpdateExternalHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersUpdateExternalErrors =
-  | CustomersUpdateExternalResourceNotFoundError
-  | CustomersUpdateExternalHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersGetStateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersGetStateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersGetStateErrors =
-  | CustomersGetStateResourceNotFoundError
-  | CustomersGetStateHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersGetStateExternalResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersGetStateExternalHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersGetStateExternalErrors =
-  | CustomersGetStateExternalResourceNotFoundError
-  | CustomersGetStateExternalHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersListPaymentMethodsResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersListPaymentMethodsHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersListPaymentMethodsErrors =
-  | CustomersListPaymentMethodsResourceNotFoundError
-  | CustomersListPaymentMethodsHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersListPaymentMethodsExternalResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersListPaymentMethodsExternalHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersListPaymentMethodsExternalErrors =
-  | CustomersListPaymentMethodsExternalResourceNotFoundError
-  | CustomersListPaymentMethodsExternalHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersMembersListResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersMembersListHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersMembersListErrors =
-  | CustomersMembersListResourceNotFoundError
-  | CustomersMembersListHTTPValidationError;
-
-/**
- * Not permitted to add members.
- */
-export class CustomersMembersCreateNotPermittedError extends Data.TaggedError("NotPermitted")<{
-  readonly status: 403;
-  readonly body: Models.NotPermitted;
-}> {}
-
-/**
- * Customer not found.
- */
-export class CustomersMembersCreateResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersMembersCreateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersMembersCreateErrors =
-  | CustomersMembersCreateNotPermittedError
-  | CustomersMembersCreateResourceNotFoundError
-  | CustomersMembersCreateHTTPValidationError;
-
-/**
- * Customer not found.
- */
-export class CustomersMembersListExternalResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * The external customer ID matches customers in several accessible organizations.
- */
-export class CustomersMembersListExternalAmbiguousExternalCustomerIDError extends Data.TaggedError(
-  "AmbiguousExternalCustomerID",
-)<{
-  readonly status: 409;
-  readonly body: Models.AmbiguousExternalCustomerID;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersMembersListExternalHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersMembersListExternalErrors =
-  | CustomersMembersListExternalResourceNotFoundError
-  | CustomersMembersListExternalAmbiguousExternalCustomerIDError
-  | CustomersMembersListExternalHTTPValidationError;
-
-/**
- * Not permitted to add members.
- */
-export class CustomersMembersCreateExternalNotPermittedError extends Data.TaggedError(
-  "NotPermitted",
-)<{
-  readonly status: 403;
-  readonly body: Models.NotPermitted;
-}> {}
-
-/**
- * Customer not found.
- */
-export class CustomersMembersCreateExternalResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * The external customer ID matches customers in several accessible organizations.
- */
-export class CustomersMembersCreateExternalAmbiguousExternalCustomerIDError extends Data.TaggedError(
-  "AmbiguousExternalCustomerID",
-)<{
-  readonly status: 409;
-  readonly body: Models.AmbiguousExternalCustomerID;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersMembersCreateExternalHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersMembersCreateExternalErrors =
-  | CustomersMembersCreateExternalNotPermittedError
-  | CustomersMembersCreateExternalResourceNotFoundError
-  | CustomersMembersCreateExternalAmbiguousExternalCustomerIDError
-  | CustomersMembersCreateExternalHTTPValidationError;
-
-/**
- * Member not found.
- */
-export class CustomersMembersGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersMembersGetHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersMembersGetErrors =
-  | CustomersMembersGetResourceNotFoundError
-  | CustomersMembersGetHTTPValidationError;
-
-/**
- * Member not found.
- */
-export class CustomersMembersDeleteResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersMembersDeleteHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersMembersDeleteErrors =
-  | CustomersMembersDeleteResourceNotFoundError
-  | CustomersMembersDeleteHTTPValidationError;
-
-/**
- * Member not found.
- */
-export class CustomersMembersUpdateResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomersMembersUpdateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersMembersUpdateErrors =
-  | CustomersMembersUpdateResourceNotFoundError
-  | CustomersMembersUpdateHTTPValidationError;
-
-/**
- * Member not found.
- */
-export class CustomersMembersGetExternalResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * The external customer ID matches customers in several accessible organizations.
- */
-export class CustomersMembersGetExternalAmbiguousExternalCustomerIDError extends Data.TaggedError(
-  "AmbiguousExternalCustomerID",
-)<{
-  readonly status: 409;
-  readonly body: Models.AmbiguousExternalCustomerID;
-}> {}
-
-/**
  * Validation Error
  */
-export class CustomersMembersGetExternalHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
+export class EventsListNamesHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
   readonly status: 422;
   readonly body: Models.HTTPValidationError;
 }> {}
 
-export type CustomersMembersGetExternalErrors =
-  | CustomersMembersGetExternalResourceNotFoundError
-  | CustomersMembersGetExternalAmbiguousExternalCustomerIDError
-  | CustomersMembersGetExternalHTTPValidationError;
+export type EventsListNamesErrors = EventsListNamesHTTPValidationError;
 
 /**
- * Member not found.
+ * Event not found.
  */
-export class CustomersMembersDeleteExternalResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
+export class EventsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
   readonly status: 404;
   readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * The external customer ID matches customers in several accessible organizations.
- */
-export class CustomersMembersDeleteExternalAmbiguousExternalCustomerIDError extends Data.TaggedError(
-  "AmbiguousExternalCustomerID",
-)<{
-  readonly status: 409;
-  readonly body: Models.AmbiguousExternalCustomerID;
 }> {}
 
 /**
  * Validation Error
  */
-export class CustomersMembersDeleteExternalHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
+export class EventsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
   readonly status: 422;
   readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomersMembersDeleteExternalErrors =
-  | CustomersMembersDeleteExternalResourceNotFoundError
-  | CustomersMembersDeleteExternalAmbiguousExternalCustomerIDError
-  | CustomersMembersDeleteExternalHTTPValidationError;
-
-/**
- * Member not found.
- */
-export class CustomersMembersUpdateExternalResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
 }> {}
 
-/**
- * The external customer ID matches customers in several accessible organizations.
- */
-export class CustomersMembersUpdateExternalAmbiguousExternalCustomerIDError extends Data.TaggedError(
-  "AmbiguousExternalCustomerID",
-)<{
-  readonly status: 409;
-  readonly body: Models.AmbiguousExternalCustomerID;
-}> {}
+export type EventsGetErrors = EventsGetResourceNotFoundError | EventsGetHTTPValidationError;
 
 /**
  * Validation Error
  */
-export class CustomersMembersUpdateExternalHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
+export class EventsIngestHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
   readonly status: 422;
   readonly body: Models.HTTPValidationError;
 }> {}
 
-export type CustomersMembersUpdateExternalErrors =
-  | CustomersMembersUpdateExternalResourceNotFoundError
-  | CustomersMembersUpdateExternalAmbiguousExternalCustomerIDError
-  | CustomersMembersUpdateExternalHTTPValidationError;
+export type EventsIngestErrors = EventsIngestHTTPValidationError;
 
 /**
  * Validation Error
@@ -3199,11 +649,11 @@ export class CustomerPortalLicenseKeysValidateBadRequestError extends Data.Tagge
   "BadRequest",
 )<{
   readonly status: 400;
-  readonly body: unknown;
+  readonly body: Models.BadRequest;
 }> {}
 
 /**
- * License key not found, revoked, disabled, or expired, or the supplied activation, conditions, benefit, or customer do not match.
+ * License key not found, revoked, disabled, or expired, or the supplied activation is missing or does not match, or the conditions, benefit, or customer do not match.
  */
 export class CustomerPortalLicenseKeysValidateResourceNotFoundError extends Data.TaggedError(
   "ResourceNotFound",
@@ -3598,76 +1048,6 @@ export type CustomerPortalOrdersReceiptErrors =
   | CustomerPortalOrdersReceiptHTTPValidationError;
 
 /**
- * Order not found.
- */
-export class CustomerPortalOrdersGetPaymentStatusResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomerPortalOrdersGetPaymentStatusHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomerPortalOrdersGetPaymentStatusErrors =
-  | CustomerPortalOrdersGetPaymentStatusResourceNotFoundError
-  | CustomerPortalOrdersGetPaymentStatusHTTPValidationError;
-
-/**
- * Order not found.
- */
-export class CustomerPortalOrdersConfirmRetryPaymentResourceNotFoundError extends Data.TaggedError(
-  "ResourceNotFound",
-)<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Payment already in progress.
- */
-export class CustomerPortalOrdersConfirmRetryPaymentPaymentAlreadyInProgressError extends Data.TaggedError(
-  "PaymentAlreadyInProgress",
-)<{
-  readonly status: 409;
-  readonly body: Models.PaymentAlreadyInProgress;
-}> {}
-
-/**
- * Order not eligible for retry or payment confirmation failed.
- */
-export class CustomerPortalOrdersConfirmRetryPaymentOrderNotEligibleForRetryError extends Data.TaggedError(
-  "OrderNotEligibleForRetry",
-)<{
-  readonly status: 422;
-  readonly body: Models.OrderNotEligibleForRetry;
-}> {}
-
-/**
- * Manual retry limit exceeded.
- */
-export class CustomerPortalOrdersConfirmRetryPaymentManualRetryLimitExceededError extends Data.TaggedError(
-  "ManualRetryLimitExceeded",
-)<{
-  readonly status: 429;
-  readonly body: Models.ManualRetryLimitExceeded;
-}> {}
-
-export type CustomerPortalOrdersConfirmRetryPaymentErrors =
-  | CustomerPortalOrdersConfirmRetryPaymentResourceNotFoundError
-  | CustomerPortalOrdersConfirmRetryPaymentPaymentAlreadyInProgressError
-  | CustomerPortalOrdersConfirmRetryPaymentOrderNotEligibleForRetryError
-  | CustomerPortalOrdersConfirmRetryPaymentManualRetryLimitExceededError;
-
-/**
  * Organization not found.
  */
 export class CustomerPortalOrganizationsGetResourceNotFoundError extends Data.TaggedError(
@@ -3878,19 +1258,87 @@ export type CustomerPortalSubscriptionsUpdateErrors =
 /**
  * Validation Error
  */
-export class CustomerPortalWalletsListHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
+export class CustomersListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
   readonly status: 422;
   readonly body: Models.HTTPValidationError;
 }> {}
 
-export type CustomerPortalWalletsListErrors = CustomerPortalWalletsListHTTPValidationError;
+export type CustomersListErrors = CustomersListHTTPValidationError;
 
 /**
- * Wallet not found.
+ * Validation Error
  */
-export class CustomerPortalWalletsGetResourceNotFoundError extends Data.TaggedError(
+export class CustomersCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersCreateErrors = CustomersCreateHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersGetErrors =
+  | CustomersGetResourceNotFoundError
+  | CustomersGetHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersDeleteErrors =
+  | CustomersDeleteResourceNotFoundError
+  | CustomersDeleteHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersUpdateErrors =
+  | CustomersUpdateResourceNotFoundError
+  | CustomersUpdateHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersGetExternalResourceNotFoundError extends Data.TaggedError(
   "ResourceNotFound",
 )<{
   readonly status: 404;
@@ -3900,16 +1348,2612 @@ export class CustomerPortalWalletsGetResourceNotFoundError extends Data.TaggedEr
 /**
  * Validation Error
  */
-export class CustomerPortalWalletsGetHTTPValidationError extends Data.TaggedError(
+export class CustomersGetExternalHTTPValidationError extends Data.TaggedError(
   "HTTPValidationError",
 )<{
   readonly status: 422;
   readonly body: Models.HTTPValidationError;
 }> {}
 
-export type CustomerPortalWalletsGetErrors =
-  | CustomerPortalWalletsGetResourceNotFoundError
-  | CustomerPortalWalletsGetHTTPValidationError;
+export type CustomersGetExternalErrors =
+  | CustomersGetExternalResourceNotFoundError
+  | CustomersGetExternalHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersDeleteExternalResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersDeleteExternalHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersDeleteExternalErrors =
+  | CustomersDeleteExternalResourceNotFoundError
+  | CustomersDeleteExternalHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersUpdateExternalResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersUpdateExternalHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersUpdateExternalErrors =
+  | CustomersUpdateExternalResourceNotFoundError
+  | CustomersUpdateExternalHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersGetStateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersGetStateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersGetStateErrors =
+  | CustomersGetStateResourceNotFoundError
+  | CustomersGetStateHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersGetStateExternalResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersGetStateExternalHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersGetStateExternalErrors =
+  | CustomersGetStateExternalResourceNotFoundError
+  | CustomersGetStateExternalHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersListPaymentMethodsResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersListPaymentMethodsHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersListPaymentMethodsErrors =
+  | CustomersListPaymentMethodsResourceNotFoundError
+  | CustomersListPaymentMethodsHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersListPaymentMethodsExternalResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersListPaymentMethodsExternalHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersListPaymentMethodsExternalErrors =
+  | CustomersListPaymentMethodsExternalResourceNotFoundError
+  | CustomersListPaymentMethodsExternalHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersMembersListResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersMembersListHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersMembersListErrors =
+  | CustomersMembersListResourceNotFoundError
+  | CustomersMembersListHTTPValidationError;
+
+/**
+ * Not permitted to add members.
+ */
+export class CustomersMembersCreateNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * Customer not found.
+ */
+export class CustomersMembersCreateResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersMembersCreateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersMembersCreateErrors =
+  | CustomersMembersCreateNotPermittedError
+  | CustomersMembersCreateResourceNotFoundError
+  | CustomersMembersCreateHTTPValidationError;
+
+/**
+ * Customer not found.
+ */
+export class CustomersMembersListExternalResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * The external customer ID matches customers in several accessible organizations.
+ */
+export class CustomersMembersListExternalAmbiguousExternalCustomerIDError extends Data.TaggedError(
+  "AmbiguousExternalCustomerID",
+)<{
+  readonly status: 409;
+  readonly body: Models.AmbiguousExternalCustomerID;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersMembersListExternalHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersMembersListExternalErrors =
+  | CustomersMembersListExternalResourceNotFoundError
+  | CustomersMembersListExternalAmbiguousExternalCustomerIDError
+  | CustomersMembersListExternalHTTPValidationError;
+
+/**
+ * Not permitted to add members.
+ */
+export class CustomersMembersCreateExternalNotPermittedError extends Data.TaggedError(
+  "NotPermitted",
+)<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * Customer not found.
+ */
+export class CustomersMembersCreateExternalResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * The external customer ID matches customers in several accessible organizations.
+ */
+export class CustomersMembersCreateExternalAmbiguousExternalCustomerIDError extends Data.TaggedError(
+  "AmbiguousExternalCustomerID",
+)<{
+  readonly status: 409;
+  readonly body: Models.AmbiguousExternalCustomerID;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersMembersCreateExternalHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersMembersCreateExternalErrors =
+  | CustomersMembersCreateExternalNotPermittedError
+  | CustomersMembersCreateExternalResourceNotFoundError
+  | CustomersMembersCreateExternalAmbiguousExternalCustomerIDError
+  | CustomersMembersCreateExternalHTTPValidationError;
+
+/**
+ * Member not found.
+ */
+export class CustomersMembersGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersMembersGetHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersMembersGetErrors =
+  | CustomersMembersGetResourceNotFoundError
+  | CustomersMembersGetHTTPValidationError;
+
+/**
+ * Member not found.
+ */
+export class CustomersMembersDeleteResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersMembersDeleteHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersMembersDeleteErrors =
+  | CustomersMembersDeleteResourceNotFoundError
+  | CustomersMembersDeleteHTTPValidationError;
+
+/**
+ * Member not found.
+ */
+export class CustomersMembersUpdateResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersMembersUpdateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersMembersUpdateErrors =
+  | CustomersMembersUpdateResourceNotFoundError
+  | CustomersMembersUpdateHTTPValidationError;
+
+/**
+ * Member not found.
+ */
+export class CustomersMembersGetExternalResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * The external customer ID matches customers in several accessible organizations.
+ */
+export class CustomersMembersGetExternalAmbiguousExternalCustomerIDError extends Data.TaggedError(
+  "AmbiguousExternalCustomerID",
+)<{
+  readonly status: 409;
+  readonly body: Models.AmbiguousExternalCustomerID;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersMembersGetExternalHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersMembersGetExternalErrors =
+  | CustomersMembersGetExternalResourceNotFoundError
+  | CustomersMembersGetExternalAmbiguousExternalCustomerIDError
+  | CustomersMembersGetExternalHTTPValidationError;
+
+/**
+ * Member not found.
+ */
+export class CustomersMembersDeleteExternalResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * The external customer ID matches customers in several accessible organizations.
+ */
+export class CustomersMembersDeleteExternalAmbiguousExternalCustomerIDError extends Data.TaggedError(
+  "AmbiguousExternalCustomerID",
+)<{
+  readonly status: 409;
+  readonly body: Models.AmbiguousExternalCustomerID;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersMembersDeleteExternalHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersMembersDeleteExternalErrors =
+  | CustomersMembersDeleteExternalResourceNotFoundError
+  | CustomersMembersDeleteExternalAmbiguousExternalCustomerIDError
+  | CustomersMembersDeleteExternalHTTPValidationError;
+
+/**
+ * Member not found.
+ */
+export class CustomersMembersUpdateExternalResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * The external customer ID matches customers in several accessible organizations.
+ */
+export class CustomersMembersUpdateExternalAmbiguousExternalCustomerIDError extends Data.TaggedError(
+  "AmbiguousExternalCustomerID",
+)<{
+  readonly status: 409;
+  readonly body: Models.AmbiguousExternalCustomerID;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomersMembersUpdateExternalHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomersMembersUpdateExternalErrors =
+  | CustomersMembersUpdateExternalResourceNotFoundError
+  | CustomersMembersUpdateExternalAmbiguousExternalCustomerIDError
+  | CustomersMembersUpdateExternalHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class CheckoutsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutsListErrors = CheckoutsListHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class CheckoutsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutsCreateErrors = CheckoutsCreateHTTPValidationError;
+
+/**
+ * Checkout session not found.
+ */
+export class CheckoutsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CheckoutsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutsGetErrors =
+  | CheckoutsGetResourceNotFoundError
+  | CheckoutsGetHTTPValidationError;
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsUpdateAlreadyActiveSubscriptionError extends Data.TaggedError(
+  "AlreadyActiveSubscriptionError",
+)<{
+  readonly status: 403;
+  readonly body: Models.AlreadyActiveSubscriptionError;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsUpdateNotOpenCheckoutError extends Data.TaggedError("NotOpenCheckout")<{
+  readonly status: 403;
+  readonly body: Models.NotOpenCheckout;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsUpdateNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsUpdatePaymentNotReadyError extends Data.TaggedError("PaymentNotReady")<{
+  readonly status: 403;
+  readonly body: Models.PaymentNotReady;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsUpdateTrialAlreadyRedeemedError extends Data.TaggedError(
+  "TrialAlreadyRedeemed",
+)<{
+  readonly status: 403;
+  readonly body: Models.TrialAlreadyRedeemed;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsUpdateDiscountRedemptionLimitReachedError extends Data.TaggedError(
+  "DiscountRedemptionLimitReached",
+)<{
+  readonly status: 403;
+  readonly body: Models.DiscountRedemptionLimitReached;
+}> {}
+
+/**
+ * Checkout session not found.
+ */
+export class CheckoutsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CheckoutsUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutsUpdateErrors =
+  | CheckoutsUpdateAlreadyActiveSubscriptionError
+  | CheckoutsUpdateNotOpenCheckoutError
+  | CheckoutsUpdateNotPermittedError
+  | CheckoutsUpdatePaymentNotReadyError
+  | CheckoutsUpdateTrialAlreadyRedeemedError
+  | CheckoutsUpdateDiscountRedemptionLimitReachedError
+  | CheckoutsUpdateResourceNotFoundError
+  | CheckoutsUpdateHTTPValidationError;
+
+/**
+ * The organization is not allowed to accept payments.
+ */
+export class CheckoutsClientGetNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * Checkout session not found.
+ */
+export class CheckoutsClientGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * The checkout session is expired.
+ */
+export class CheckoutsClientGetExpiredCheckoutError extends Data.TaggedError(
+  "ExpiredCheckoutError",
+)<{
+  readonly status: 410;
+  readonly body: Models.ExpiredCheckoutError;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CheckoutsClientGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutsClientGetErrors =
+  | CheckoutsClientGetNotPermittedError
+  | CheckoutsClientGetResourceNotFoundError
+  | CheckoutsClientGetExpiredCheckoutError
+  | CheckoutsClientGetHTTPValidationError;
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientUpdateAlreadyActiveSubscriptionError extends Data.TaggedError(
+  "AlreadyActiveSubscriptionError",
+)<{
+  readonly status: 403;
+  readonly body: Models.AlreadyActiveSubscriptionError;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientUpdateNotOpenCheckoutError extends Data.TaggedError("NotOpenCheckout")<{
+  readonly status: 403;
+  readonly body: Models.NotOpenCheckout;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientUpdateNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientUpdatePaymentNotReadyError extends Data.TaggedError("PaymentNotReady")<{
+  readonly status: 403;
+  readonly body: Models.PaymentNotReady;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientUpdateTrialAlreadyRedeemedError extends Data.TaggedError(
+  "TrialAlreadyRedeemed",
+)<{
+  readonly status: 403;
+  readonly body: Models.TrialAlreadyRedeemed;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientUpdateDiscountRedemptionLimitReachedError extends Data.TaggedError(
+  "DiscountRedemptionLimitReached",
+)<{
+  readonly status: 403;
+  readonly body: Models.DiscountRedemptionLimitReached;
+}> {}
+
+/**
+ * Checkout session not found.
+ */
+export class CheckoutsClientUpdateResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * The checkout session is being processed.
+ */
+export class CheckoutsClientUpdateCheckoutLockedError extends Data.TaggedError("CheckoutLocked")<{
+  readonly status: 409;
+  readonly body: Models.CheckoutLocked;
+}> {}
+
+/**
+ * The checkout session is expired.
+ */
+export class CheckoutsClientUpdateExpiredCheckoutError extends Data.TaggedError(
+  "ExpiredCheckoutError",
+)<{
+  readonly status: 410;
+  readonly body: Models.ExpiredCheckoutError;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CheckoutsClientUpdateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutsClientUpdateErrors =
+  | CheckoutsClientUpdateAlreadyActiveSubscriptionError
+  | CheckoutsClientUpdateNotOpenCheckoutError
+  | CheckoutsClientUpdateNotPermittedError
+  | CheckoutsClientUpdatePaymentNotReadyError
+  | CheckoutsClientUpdateTrialAlreadyRedeemedError
+  | CheckoutsClientUpdateDiscountRedemptionLimitReachedError
+  | CheckoutsClientUpdateResourceNotFoundError
+  | CheckoutsClientUpdateCheckoutLockedError
+  | CheckoutsClientUpdateExpiredCheckoutError
+  | CheckoutsClientUpdateHTTPValidationError;
+
+/**
+ * The payment failed.
+ */
+export class CheckoutsClientConfirmPaymentError extends Data.TaggedError("PaymentError")<{
+  readonly status: 400;
+  readonly body: Models.PaymentError;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientConfirmAlreadyActiveSubscriptionError extends Data.TaggedError(
+  "AlreadyActiveSubscriptionError",
+)<{
+  readonly status: 403;
+  readonly body: Models.AlreadyActiveSubscriptionError;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientConfirmNotOpenCheckoutError extends Data.TaggedError(
+  "NotOpenCheckout",
+)<{
+  readonly status: 403;
+  readonly body: Models.NotOpenCheckout;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientConfirmNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientConfirmPaymentNotReadyError extends Data.TaggedError(
+  "PaymentNotReady",
+)<{
+  readonly status: 403;
+  readonly body: Models.PaymentNotReady;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientConfirmTrialAlreadyRedeemedError extends Data.TaggedError(
+  "TrialAlreadyRedeemed",
+)<{
+  readonly status: 403;
+  readonly body: Models.TrialAlreadyRedeemed;
+}> {}
+
+/**
+ * The checkout is expired, the customer already has an active subscription, or the organization is not ready to accept payments.
+ */
+export class CheckoutsClientConfirmDiscountRedemptionLimitReachedError extends Data.TaggedError(
+  "DiscountRedemptionLimitReached",
+)<{
+  readonly status: 403;
+  readonly body: Models.DiscountRedemptionLimitReached;
+}> {}
+
+/**
+ * Checkout session not found.
+ */
+export class CheckoutsClientConfirmResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * The checkout session is being processed.
+ */
+export class CheckoutsClientConfirmCheckoutLockedError extends Data.TaggedError("CheckoutLocked")<{
+  readonly status: 409;
+  readonly body: Models.CheckoutLocked;
+}> {}
+
+/**
+ * The checkout session is expired.
+ */
+export class CheckoutsClientConfirmExpiredCheckoutError extends Data.TaggedError(
+  "ExpiredCheckoutError",
+)<{
+  readonly status: 410;
+  readonly body: Models.ExpiredCheckoutError;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CheckoutsClientConfirmHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutsClientConfirmErrors =
+  | CheckoutsClientConfirmPaymentError
+  | CheckoutsClientConfirmAlreadyActiveSubscriptionError
+  | CheckoutsClientConfirmNotOpenCheckoutError
+  | CheckoutsClientConfirmNotPermittedError
+  | CheckoutsClientConfirmPaymentNotReadyError
+  | CheckoutsClientConfirmTrialAlreadyRedeemedError
+  | CheckoutsClientConfirmDiscountRedemptionLimitReachedError
+  | CheckoutsClientConfirmResourceNotFoundError
+  | CheckoutsClientConfirmCheckoutLockedError
+  | CheckoutsClientConfirmExpiredCheckoutError
+  | CheckoutsClientConfirmHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class SubscriptionsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type SubscriptionsListErrors = SubscriptionsListHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class SubscriptionsCreateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type SubscriptionsCreateErrors = SubscriptionsCreateHTTPValidationError;
+
+/**
+ * Subscription not found.
+ */
+export class SubscriptionsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class SubscriptionsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type SubscriptionsGetErrors =
+  | SubscriptionsGetResourceNotFoundError
+  | SubscriptionsGetHTTPValidationError;
+
+/**
+ * This subscription is already revoked.
+ */
+export class SubscriptionsRevokeAlreadyCanceledSubscriptionError extends Data.TaggedError(
+  "AlreadyCanceledSubscription",
+)<{
+  readonly status: 403;
+  readonly body: Models.AlreadyCanceledSubscription;
+}> {}
+
+/**
+ * Subscription not found.
+ */
+export class SubscriptionsRevokeResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Subscription is pending an update.
+ */
+export class SubscriptionsRevokeSubscriptionLockedError extends Data.TaggedError(
+  "SubscriptionLocked",
+)<{
+  readonly status: 409;
+  readonly body: Models.SubscriptionLocked;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class SubscriptionsRevokeHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type SubscriptionsRevokeErrors =
+  | SubscriptionsRevokeAlreadyCanceledSubscriptionError
+  | SubscriptionsRevokeResourceNotFoundError
+  | SubscriptionsRevokeSubscriptionLockedError
+  | SubscriptionsRevokeHTTPValidationError;
+
+/**
+ * The charge failed, or requires customer authentication that can't be completed off-session.
+ */
+export class SubscriptionsUpdatePaymentFailedError extends Data.TaggedError("PaymentFailed")<{
+  readonly status: 402;
+  readonly body: Models.PaymentFailed;
+}> {}
+
+/**
+ * The charge failed, or requires customer authentication that can't be completed off-session.
+ */
+export class SubscriptionsUpdatePaymentActionRequiredError extends Data.TaggedError(
+  "PaymentActionRequired",
+)<{
+  readonly status: 402;
+  readonly body: Models.PaymentActionRequired;
+}> {}
+
+/**
+ * Subscription is already canceled or will be at the end of the period, is not active, or the organization is not ready to renew subscriptions.
+ */
+export class SubscriptionsUpdateAlreadyCanceledSubscriptionError extends Data.TaggedError(
+  "AlreadyCanceledSubscription",
+)<{
+  readonly status: 403;
+  readonly body: Models.AlreadyCanceledSubscription;
+}> {}
+
+/**
+ * Subscription is already canceled or will be at the end of the period, is not active, or the organization is not ready to renew subscriptions.
+ */
+export class SubscriptionsUpdateInactiveSubscriptionError extends Data.TaggedError(
+  "InactiveSubscription",
+)<{
+  readonly status: 403;
+  readonly body: Models.InactiveSubscription;
+}> {}
+
+/**
+ * Subscription is already canceled or will be at the end of the period, is not active, or the organization is not ready to renew subscriptions.
+ */
+export class SubscriptionsUpdatePaymentNotReadyError extends Data.TaggedError("PaymentNotReady")<{
+  readonly status: 403;
+  readonly body: Models.PaymentNotReady;
+}> {}
+
+/**
+ * Subscription not found.
+ */
+export class SubscriptionsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Subscription is pending an update, or is not scheduled to be canceled.
+ */
+export class SubscriptionsUpdateSubscriptionLockedError extends Data.TaggedError(
+  "SubscriptionLocked",
+)<{
+  readonly status: 409;
+  readonly body: Models.SubscriptionLocked;
+}> {}
+
+/**
+ * Subscription is pending an update, or is not scheduled to be canceled.
+ */
+export class SubscriptionsUpdateSubscriptionNotScheduledToCancelError extends Data.TaggedError(
+  "SubscriptionNotScheduledToCancel",
+)<{
+  readonly status: 409;
+  readonly body: Models.SubscriptionNotScheduledToCancel;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class SubscriptionsUpdateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type SubscriptionsUpdateErrors =
+  | SubscriptionsUpdatePaymentFailedError
+  | SubscriptionsUpdatePaymentActionRequiredError
+  | SubscriptionsUpdateAlreadyCanceledSubscriptionError
+  | SubscriptionsUpdateInactiveSubscriptionError
+  | SubscriptionsUpdatePaymentNotReadyError
+  | SubscriptionsUpdateResourceNotFoundError
+  | SubscriptionsUpdateSubscriptionLockedError
+  | SubscriptionsUpdateSubscriptionNotScheduledToCancelError
+  | SubscriptionsUpdateHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class ProductsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type ProductsListErrors = ProductsListHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class ProductsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type ProductsCreateErrors = ProductsCreateHTTPValidationError;
+
+/**
+ * Product not found.
+ */
+export class ProductsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class ProductsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type ProductsGetErrors = ProductsGetResourceNotFoundError | ProductsGetHTTPValidationError;
+
+/**
+ * You don't have the permission to delete this product.
+ */
+export class ProductsDeleteNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * Product not found.
+ */
+export class ProductsDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Product is in use and cannot be deleted.
+ */
+export class ProductsDeleteProductNotDeletableError extends Data.TaggedError(
+  "ProductNotDeletable",
+)<{
+  readonly status: 409;
+  readonly body: Models.ProductNotDeletable;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class ProductsDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type ProductsDeleteErrors =
+  | ProductsDeleteNotPermittedError
+  | ProductsDeleteResourceNotFoundError
+  | ProductsDeleteProductNotDeletableError
+  | ProductsDeleteHTTPValidationError;
+
+/**
+ * You don't have the permission to update this product.
+ */
+export class ProductsUpdateNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * Product not found.
+ */
+export class ProductsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class ProductsUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type ProductsUpdateErrors =
+  | ProductsUpdateNotPermittedError
+  | ProductsUpdateResourceNotFoundError
+  | ProductsUpdateHTTPValidationError;
+
+/**
+ * You don't have the permission to update this product.
+ */
+export class ProductsUpdateBenefitsNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * Product not found.
+ */
+export class ProductsUpdateBenefitsResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class ProductsUpdateBenefitsHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type ProductsUpdateBenefitsErrors =
+  | ProductsUpdateBenefitsNotPermittedError
+  | ProductsUpdateBenefitsResourceNotFoundError
+  | ProductsUpdateBenefitsHTTPValidationError;
+
+/**
+ * Not authorized to manage license key.
+ */
+export class LicenseKeysListUnauthorizedError extends Data.TaggedError("Unauthorized")<{
+  readonly status: 401;
+  readonly body: Models.Unauthorized;
+}> {}
+
+/**
+ * License key not found.
+ */
+export class LicenseKeysListResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class LicenseKeysListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type LicenseKeysListErrors =
+  | LicenseKeysListUnauthorizedError
+  | LicenseKeysListResourceNotFoundError
+  | LicenseKeysListHTTPValidationError;
+
+/**
+ * Not authorized to manage license key.
+ */
+export class LicenseKeysGetUnauthorizedError extends Data.TaggedError("Unauthorized")<{
+  readonly status: 401;
+  readonly body: Models.Unauthorized;
+}> {}
+
+/**
+ * License key not found.
+ */
+export class LicenseKeysGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class LicenseKeysGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type LicenseKeysGetErrors =
+  | LicenseKeysGetUnauthorizedError
+  | LicenseKeysGetResourceNotFoundError
+  | LicenseKeysGetHTTPValidationError;
+
+/**
+ * Not authorized to manage license key.
+ */
+export class LicenseKeysUpdateUnauthorizedError extends Data.TaggedError("Unauthorized")<{
+  readonly status: 401;
+  readonly body: Models.Unauthorized;
+}> {}
+
+/**
+ * License key not found.
+ */
+export class LicenseKeysUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class LicenseKeysUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type LicenseKeysUpdateErrors =
+  | LicenseKeysUpdateUnauthorizedError
+  | LicenseKeysUpdateResourceNotFoundError
+  | LicenseKeysUpdateHTTPValidationError;
+
+/**
+ * License key cannot be rotated in its current status. Allowed statuses: disabled, granted.
+ */
+export class LicenseKeysRotateRotateNotPermittedError extends Data.TaggedError(
+  "RotateNotPermitted",
+)<{
+  readonly status: 400;
+  readonly body: Models.RotateNotPermitted;
+}> {}
+
+/**
+ * Not authorized to manage license key.
+ */
+export class LicenseKeysRotateUnauthorizedError extends Data.TaggedError("Unauthorized")<{
+  readonly status: 401;
+  readonly body: Models.Unauthorized;
+}> {}
+
+/**
+ * License key not found.
+ */
+export class LicenseKeysRotateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class LicenseKeysRotateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type LicenseKeysRotateErrors =
+  | LicenseKeysRotateRotateNotPermittedError
+  | LicenseKeysRotateUnauthorizedError
+  | LicenseKeysRotateResourceNotFoundError
+  | LicenseKeysRotateHTTPValidationError;
+
+/**
+ * Not authorized to manage license key.
+ */
+export class LicenseKeysGetActivationUnauthorizedError extends Data.TaggedError("Unauthorized")<{
+  readonly status: 401;
+  readonly body: Models.Unauthorized;
+}> {}
+
+/**
+ * License key or activation not found, or activation does not belong to the license key.
+ */
+export class LicenseKeysGetActivationResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class LicenseKeysGetActivationHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type LicenseKeysGetActivationErrors =
+  | LicenseKeysGetActivationUnauthorizedError
+  | LicenseKeysGetActivationResourceNotFoundError
+  | LicenseKeysGetActivationHTTPValidationError;
+
+/**
+ * The requested usage increment exceeds the license key's remaining usage allowance.
+ */
+export class LicenseKeysValidateBadRequestError extends Data.TaggedError("BadRequest")<{
+  readonly status: 400;
+  readonly body: Models.BadRequest;
+}> {}
+
+/**
+ * License key not found, revoked, disabled, or expired, or the supplied activation is missing or does not match, or the conditions, benefit, or customer do not match.
+ */
+export class LicenseKeysValidateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class LicenseKeysValidateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type LicenseKeysValidateErrors =
+  | LicenseKeysValidateBadRequestError
+  | LicenseKeysValidateResourceNotFoundError
+  | LicenseKeysValidateHTTPValidationError;
+
+/**
+ * License key is revoked, disabled, or expired, does not support activations, or has reached its activation limit. Use /validate for licenses without activations.
+ */
+export class LicenseKeysActivateNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * License key not found.
+ */
+export class LicenseKeysActivateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class LicenseKeysActivateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type LicenseKeysActivateErrors =
+  | LicenseKeysActivateNotPermittedError
+  | LicenseKeysActivateResourceNotFoundError
+  | LicenseKeysActivateHTTPValidationError;
+
+/**
+ * License key or activation not found, or activation does not belong to the license key.
+ */
+export class LicenseKeysDeactivateResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class LicenseKeysDeactivateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type LicenseKeysDeactivateErrors =
+  | LicenseKeysDeactivateResourceNotFoundError
+  | LicenseKeysDeactivateHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class OrdersListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrdersListErrors = OrdersListHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class OrdersCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrdersCreateErrors = OrdersCreateHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class OrdersExportHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrdersExportErrors = OrdersExportHTTPValidationError;
+
+/**
+ * Order not found.
+ */
+export class OrdersGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class OrdersGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrdersGetErrors = OrdersGetResourceNotFoundError | OrdersGetHTTPValidationError;
+
+/**
+ * Order not found.
+ */
+export class OrdersUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class OrdersUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrdersUpdateErrors =
+  | OrdersUpdateResourceNotFoundError
+  | OrdersUpdateHTTPValidationError;
+
+/**
+ * The charge failed, or requires customer authentication (e.g. a 3DS challenge) that can't be completed off-session.
+ */
+export class OrdersFinalizePaymentFailedError extends Data.TaggedError("PaymentFailed")<{
+  readonly status: 402;
+  readonly body: Models.PaymentFailed;
+}> {}
+
+/**
+ * The charge failed, or requires customer authentication (e.g. a 3DS challenge) that can't be completed off-session.
+ */
+export class OrdersFinalizePaymentActionRequiredError extends Data.TaggedError(
+  "PaymentActionRequired",
+)<{
+  readonly status: 402;
+  readonly body: Models.PaymentActionRequired;
+}> {}
+
+/**
+ * Off-session charges are not enabled for this organization, or its account can't currently accept payments.
+ */
+export class OrdersFinalizeOffSessionChargesNotEnabledError extends Data.TaggedError(
+  "OffSessionChargesNotEnabled",
+)<{
+  readonly status: 403;
+  readonly body: Models.OffSessionChargesNotEnabled;
+}> {}
+
+/**
+ * Off-session charges are not enabled for this organization, or its account can't currently accept payments.
+ */
+export class OrdersFinalizeOrganizationNotReadyForPaymentsError extends Data.TaggedError(
+  "OrganizationNotReadyForPayments",
+)<{
+  readonly status: 403;
+  readonly body: Models.OrganizationNotReadyForPayments;
+}> {}
+
+/**
+ * Order not found.
+ */
+export class OrdersFinalizeResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * The order is not in `draft` status.
+ */
+export class OrdersFinalizeOrderNotDraftError extends Data.TaggedError("OrderNotDraft")<{
+  readonly status: 412;
+  readonly body: Models.OrderNotDraft;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class OrdersFinalizeHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrdersFinalizeErrors =
+  | OrdersFinalizePaymentFailedError
+  | OrdersFinalizePaymentActionRequiredError
+  | OrdersFinalizeOffSessionChargesNotEnabledError
+  | OrdersFinalizeOrganizationNotReadyForPaymentsError
+  | OrdersFinalizeResourceNotFoundError
+  | OrdersFinalizeOrderNotDraftError
+  | OrdersFinalizeHTTPValidationError;
+
+/**
+ * Order not found.
+ */
+export class OrdersInvoiceResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class OrdersInvoiceHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrdersInvoiceErrors =
+  | OrdersInvoiceResourceNotFoundError
+  | OrdersInvoiceHTTPValidationError;
+
+/**
+ * Order not found.
+ */
+export class OrdersGenerateInvoiceResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Order is not eligible for invoice generation (invalid status).
+ */
+export class OrdersGenerateInvoiceOrderNotEligibleForInvoiceError extends Data.TaggedError(
+  "OrderNotEligibleForInvoice",
+)<{
+  readonly status: 409;
+  readonly body: Models.OrderNotEligibleForInvoice;
+}> {}
+
+/**
+ * Order is missing billing name or address.
+ */
+export class OrdersGenerateInvoiceMissingInvoiceBillingDetailsError extends Data.TaggedError(
+  "MissingInvoiceBillingDetails",
+)<{
+  readonly status: 422;
+  readonly body: Models.MissingInvoiceBillingDetails;
+}> {}
+
+export type OrdersGenerateInvoiceErrors =
+  | OrdersGenerateInvoiceResourceNotFoundError
+  | OrdersGenerateInvoiceOrderNotEligibleForInvoiceError
+  | OrdersGenerateInvoiceMissingInvoiceBillingDetailsError;
+
+/**
+ * Order not found.
+ */
+export class OrdersReceiptResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class OrdersReceiptHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrdersReceiptErrors =
+  | OrdersReceiptResourceNotFoundError
+  | OrdersReceiptHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class OrganizationsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrganizationsListErrors = OrganizationsListHTTPValidationError;
+
+/**
+ * Forbidden
+ */
+export class OrganizationsCreateCannotCreateOrganizationError extends Data.TaggedError(
+  "CannotCreateOrganizationError",
+)<{
+  readonly status: 403;
+  readonly body: Models.CannotCreateOrganizationError;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class OrganizationsCreateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrganizationsCreateErrors =
+  | OrganizationsCreateCannotCreateOrganizationError
+  | OrganizationsCreateHTTPValidationError;
+
+/**
+ * Organization not found.
+ */
+export class OrganizationsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class OrganizationsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrganizationsGetErrors =
+  | OrganizationsGetResourceNotFoundError
+  | OrganizationsGetHTTPValidationError;
+
+/**
+ * You don't have the permission to update this organization, or dispute auto-accept isn't enabled for it.
+ */
+export class OrganizationsUpdateNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * You don't have the permission to update this organization, or dispute auto-accept isn't enabled for it.
+ */
+export class OrganizationsUpdateDisputeAutoAcceptNotEnabledError extends Data.TaggedError(
+  "DisputeAutoAcceptNotEnabled",
+)<{
+  readonly status: 403;
+  readonly body: Models.DisputeAutoAcceptNotEnabled;
+}> {}
+
+/**
+ * Organization not found.
+ */
+export class OrganizationsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Cannot enforce SSO without an enabled connection.
+ */
+export class OrganizationsUpdateSSOEnforcementRequiresConnectionError extends Data.TaggedError(
+  "SSOEnforcementRequiresConnection",
+)<{
+  readonly status: 409;
+  readonly body: Models.SSOEnforcementRequiresConnection;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class OrganizationsUpdateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type OrganizationsUpdateErrors =
+  | OrganizationsUpdateNotPermittedError
+  | OrganizationsUpdateDisputeAutoAcceptNotEnabledError
+  | OrganizationsUpdateResourceNotFoundError
+  | OrganizationsUpdateSSOEnforcementRequiresConnectionError
+  | OrganizationsUpdateHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class CustomerMetersListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomerMetersListErrors = CustomerMetersListHTTPValidationError;
+
+/**
+ * Customer meter not found.
+ */
+export class CustomerMetersGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomerMetersGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomerMetersGetErrors =
+  | CustomerMetersGetResourceNotFoundError
+  | CustomerMetersGetHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class MetricsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type MetricsGetErrors = MetricsGetHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class DiscountsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type DiscountsListErrors = DiscountsListHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class DiscountsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type DiscountsCreateErrors = DiscountsCreateHTTPValidationError;
+
+/**
+ * Discount not found.
+ */
+export class DiscountsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class DiscountsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type DiscountsGetErrors =
+  | DiscountsGetResourceNotFoundError
+  | DiscountsGetHTTPValidationError;
+
+/**
+ * Discount not found.
+ */
+export class DiscountsDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class DiscountsDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type DiscountsDeleteErrors =
+  | DiscountsDeleteResourceNotFoundError
+  | DiscountsDeleteHTTPValidationError;
+
+/**
+ * Discount not found.
+ */
+export class DiscountsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class DiscountsUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type DiscountsUpdateErrors =
+  | DiscountsUpdateResourceNotFoundError
+  | DiscountsUpdateHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class Oauth2ClientsOauth2CreateClientHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type Oauth2ClientsOauth2CreateClientErrors =
+  Oauth2ClientsOauth2CreateClientHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class Oauth2ClientsOauth2GetClientHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type Oauth2ClientsOauth2GetClientErrors = Oauth2ClientsOauth2GetClientHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class Oauth2ClientsOauth2UpdateClientHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type Oauth2ClientsOauth2UpdateClientErrors =
+  Oauth2ClientsOauth2UpdateClientHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class Oauth2ClientsOauth2DeleteClientHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type Oauth2ClientsOauth2DeleteClientErrors =
+  Oauth2ClientsOauth2DeleteClientHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class MetersListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type MetersListErrors = MetersListHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class MetersCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type MetersCreateErrors = MetersCreateHTTPValidationError;
+
+/**
+ * Meter not found.
+ */
+export class MetersGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class MetersGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type MetersGetErrors = MetersGetResourceNotFoundError | MetersGetHTTPValidationError;
+
+/**
+ * Meter not found.
+ */
+export class MetersUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class MetersUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type MetersUpdateErrors =
+  | MetersUpdateResourceNotFoundError
+  | MetersUpdateHTTPValidationError;
+
+/**
+ * Meter not found.
+ */
+export class MetersQuantitiesResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class MetersQuantitiesHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type MetersQuantitiesErrors =
+  | MetersQuantitiesResourceNotFoundError
+  | MetersQuantitiesHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class BenefitsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type BenefitsListErrors = BenefitsListHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class BenefitsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type BenefitsCreateErrors = BenefitsCreateHTTPValidationError;
+
+/**
+ * Benefit not found.
+ */
+export class BenefitsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class BenefitsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type BenefitsGetErrors = BenefitsGetResourceNotFoundError | BenefitsGetHTTPValidationError;
+
+/**
+ * This benefit is not deletable.
+ */
+export class BenefitsDeleteNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * Benefit not found.
+ */
+export class BenefitsDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class BenefitsDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type BenefitsDeleteErrors =
+  | BenefitsDeleteNotPermittedError
+  | BenefitsDeleteResourceNotFoundError
+  | BenefitsDeleteHTTPValidationError;
+
+/**
+ * Benefit not found.
+ */
+export class BenefitsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class BenefitsUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type BenefitsUpdateErrors =
+  | BenefitsUpdateResourceNotFoundError
+  | BenefitsUpdateHTTPValidationError;
+
+/**
+ * Benefit not found.
+ */
+export class BenefitsFilesResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class BenefitsFilesHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type BenefitsFilesErrors =
+  | BenefitsFilesResourceNotFoundError
+  | BenefitsFilesHTTPValidationError;
+
+/**
+ * Benefit not found.
+ */
+export class BenefitsGrantsResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class BenefitsGrantsHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type BenefitsGrantsErrors =
+  | BenefitsGrantsResourceNotFoundError
+  | BenefitsGrantsHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class PaymentsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type PaymentsListErrors = PaymentsListHTTPValidationError;
+
+/**
+ * Payment not found.
+ */
+export class PaymentsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class PaymentsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type PaymentsGetErrors = PaymentsGetResourceNotFoundError | PaymentsGetHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class DisputesListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type DisputesListErrors = DisputesListHTTPValidationError;
+
+/**
+ * Dispute not found.
+ */
+export class DisputesGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class DisputesGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type DisputesGetErrors = DisputesGetResourceNotFoundError | DisputesGetHTTPValidationError;
+
+/**
+ * Dispute not found.
+ */
+export class DisputesAcceptResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Conflict
+ */
+export class DisputesAcceptDisputeNotOpenError extends Data.TaggedError("DisputeNotOpenError")<{
+  readonly status: 409;
+  readonly body: Models.DisputeNotOpenError;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class DisputesAcceptHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type DisputesAcceptErrors =
+  | DisputesAcceptResourceNotFoundError
+  | DisputesAcceptDisputeNotOpenError
+  | DisputesAcceptHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class RefundsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type RefundsListErrors = RefundsListHTTPValidationError;
+
+/**
+ * Order is already fully refunded.
+ */
+export class RefundsCreateRefundedAlreadyError extends Data.TaggedError("RefundedAlready")<{
+  readonly status: 403;
+  readonly body: Models.RefundedAlready;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class RefundsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type RefundsCreateErrors =
+  | RefundsCreateRefundedAlreadyError
+  | RefundsCreateHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class WebhooksListWebhookEndpointsHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type WebhooksListWebhookEndpointsErrors = WebhooksListWebhookEndpointsHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class WebhooksCreateWebhookEndpointHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type WebhooksCreateWebhookEndpointErrors = WebhooksCreateWebhookEndpointHTTPValidationError;
+
+/**
+ * Webhook endpoint not found.
+ */
+export class WebhooksGetWebhookEndpointResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class WebhooksGetWebhookEndpointHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type WebhooksGetWebhookEndpointErrors =
+  | WebhooksGetWebhookEndpointResourceNotFoundError
+  | WebhooksGetWebhookEndpointHTTPValidationError;
+
+/**
+ * Webhook endpoint not found.
+ */
+export class WebhooksDeleteWebhookEndpointResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class WebhooksDeleteWebhookEndpointHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type WebhooksDeleteWebhookEndpointErrors =
+  | WebhooksDeleteWebhookEndpointResourceNotFoundError
+  | WebhooksDeleteWebhookEndpointHTTPValidationError;
+
+/**
+ * Webhook endpoint not found.
+ */
+export class WebhooksUpdateWebhookEndpointResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class WebhooksUpdateWebhookEndpointHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type WebhooksUpdateWebhookEndpointErrors =
+  | WebhooksUpdateWebhookEndpointResourceNotFoundError
+  | WebhooksUpdateWebhookEndpointHTTPValidationError;
+
+/**
+ * Webhook endpoint not found.
+ */
+export class WebhooksResetWebhookEndpointSecretResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class WebhooksResetWebhookEndpointSecretHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type WebhooksResetWebhookEndpointSecretErrors =
+  | WebhooksResetWebhookEndpointSecretResourceNotFoundError
+  | WebhooksResetWebhookEndpointSecretHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class WebhooksListWebhookDeliveriesHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type WebhooksListWebhookDeliveriesErrors = WebhooksListWebhookDeliveriesHTTPValidationError;
+
+/**
+ * Webhook event not found.
+ */
+export class WebhooksRedeliverWebhookEventResourceNotFoundError extends Data.TaggedError(
+  "ResourceNotFound",
+)<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class WebhooksRedeliverWebhookEventHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type WebhooksRedeliverWebhookEventErrors =
+  | WebhooksRedeliverWebhookEventResourceNotFoundError
+  | WebhooksRedeliverWebhookEventHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class BenefitGrantsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type BenefitGrantsListErrors = BenefitGrantsListHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class CheckoutLinksListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutLinksListErrors = CheckoutLinksListHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class CheckoutLinksCreateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutLinksCreateErrors = CheckoutLinksCreateHTTPValidationError;
+
+/**
+ * Checkout link not found.
+ */
+export class CheckoutLinksGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CheckoutLinksGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutLinksGetErrors =
+  | CheckoutLinksGetResourceNotFoundError
+  | CheckoutLinksGetHTTPValidationError;
+
+/**
+ * Checkout link not found.
+ */
+export class CheckoutLinksDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CheckoutLinksDeleteHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutLinksDeleteErrors =
+  | CheckoutLinksDeleteResourceNotFoundError
+  | CheckoutLinksDeleteHTTPValidationError;
+
+/**
+ * Checkout link not found.
+ */
+export class CheckoutLinksUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CheckoutLinksUpdateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CheckoutLinksUpdateErrors =
+  | CheckoutLinksUpdateResourceNotFoundError
+  | CheckoutLinksUpdateHTTPValidationError;
+
+/**
+ * The external customer ID matches customers in several accessible organizations.
+ */
+export class CustomerSessionsCreateAmbiguousExternalCustomerIDError extends Data.TaggedError(
+  "AmbiguousExternalCustomerID",
+)<{
+  readonly status: 409;
+  readonly body: Models.AmbiguousExternalCustomerID;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomerSessionsCreateHTTPValidationError extends Data.TaggedError(
+  "HTTPValidationError",
+)<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomerSessionsCreateErrors =
+  | CustomerSessionsCreateAmbiguousExternalCustomerIDError
+  | CustomerSessionsCreateHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class FilesListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type FilesListErrors = FilesListHTTPValidationError;
+
+/**
+ * Validation Error
+ */
+export class FilesCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type FilesCreateErrors = FilesCreateHTTPValidationError;
+
+/**
+ * You don't have the permission to update this file.
+ */
+export class FilesUploadedNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * File not found.
+ */
+export class FilesUploadedResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class FilesUploadedHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type FilesUploadedErrors =
+  | FilesUploadedNotPermittedError
+  | FilesUploadedResourceNotFoundError
+  | FilesUploadedHTTPValidationError;
+
+/**
+ * You don't have the permission to delete this file.
+ */
+export class FilesDeleteNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * File not found.
+ */
+export class FilesDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class FilesDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type FilesDeleteErrors =
+  | FilesDeleteNotPermittedError
+  | FilesDeleteResourceNotFoundError
+  | FilesDeleteHTTPValidationError;
+
+/**
+ * You don't have the permission to update this file.
+ */
+export class FilesUpdateNotPermittedError extends Data.TaggedError("NotPermitted")<{
+  readonly status: 403;
+  readonly body: Models.NotPermitted;
+}> {}
+
+/**
+ * File not found.
+ */
+export class FilesUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class FilesUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type FilesUpdateErrors =
+  | FilesUpdateNotPermittedError
+  | FilesUpdateResourceNotFoundError
+  | FilesUpdateHTTPValidationError;
 
 /**
  * Authentication required
@@ -4144,53 +4188,29 @@ export type CustomerSeatsClaimSeatErrors =
   | CustomerSeatsClaimSeatHTTPValidationError;
 
 /**
- * The external customer ID matches customers in several accessible organizations.
- */
-export class CustomerSessionsCreateAmbiguousExternalCustomerIDError extends Data.TaggedError(
-  "AmbiguousExternalCustomerID",
-)<{
-  readonly status: 409;
-  readonly body: Models.AmbiguousExternalCustomerID;
-}> {}
-
-/**
  * Validation Error
  */
-export class CustomerSessionsCreateHTTPValidationError extends Data.TaggedError(
-  "HTTPValidationError",
-)<{
+export class CustomFieldsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
   readonly status: 422;
   readonly body: Models.HTTPValidationError;
 }> {}
 
-export type CustomerSessionsCreateErrors =
-  | CustomerSessionsCreateAmbiguousExternalCustomerIDError
-  | CustomerSessionsCreateHTTPValidationError;
+export type CustomFieldsListErrors = CustomFieldsListHTTPValidationError;
 
 /**
  * Validation Error
  */
-export class EventsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+export class CustomFieldsCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
   readonly status: 422;
   readonly body: Models.HTTPValidationError;
 }> {}
 
-export type EventsListErrors = EventsListHTTPValidationError;
+export type CustomFieldsCreateErrors = CustomFieldsCreateHTTPValidationError;
 
 /**
- * Validation Error
+ * Custom field not found.
  */
-export class EventsListNamesHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type EventsListNamesErrors = EventsListNamesHTTPValidationError;
-
-/**
- * Event not found.
- */
-export class EventsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+export class CustomFieldsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
   readonly status: 404;
   readonly body: Models.ResourceNotFound;
 }> {}
@@ -4198,22 +4218,54 @@ export class EventsGetResourceNotFoundError extends Data.TaggedError("ResourceNo
 /**
  * Validation Error
  */
-export class EventsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+export class CustomFieldsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
   readonly status: 422;
   readonly body: Models.HTTPValidationError;
 }> {}
 
-export type EventsGetErrors = EventsGetResourceNotFoundError | EventsGetHTTPValidationError;
+export type CustomFieldsGetErrors =
+  | CustomFieldsGetResourceNotFoundError
+  | CustomFieldsGetHTTPValidationError;
+
+/**
+ * Custom field not found.
+ */
+export class CustomFieldsDeleteResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
 
 /**
  * Validation Error
  */
-export class EventsIngestHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+export class CustomFieldsDeleteHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
   readonly status: 422;
   readonly body: Models.HTTPValidationError;
 }> {}
 
-export type EventsIngestErrors = EventsIngestHTTPValidationError;
+export type CustomFieldsDeleteErrors =
+  | CustomFieldsDeleteResourceNotFoundError
+  | CustomFieldsDeleteHTTPValidationError;
+
+/**
+ * Custom field not found.
+ */
+export class CustomFieldsUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
+  readonly status: 404;
+  readonly body: Models.ResourceNotFound;
+}> {}
+
+/**
+ * Validation Error
+ */
+export class CustomFieldsUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
+  readonly status: 422;
+  readonly body: Models.HTTPValidationError;
+}> {}
+
+export type CustomFieldsUpdateErrors =
+  | CustomFieldsUpdateResourceNotFoundError
+  | CustomFieldsUpdateHTTPValidationError;
 
 /**
  * Validation Error
@@ -4243,139 +4295,3 @@ export class EventTypesUpdateHTTPValidationError extends Data.TaggedError("HTTPV
 export type EventTypesUpdateErrors =
   | EventTypesUpdateNotFoundError
   | EventTypesUpdateHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class MetersListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetersListErrors = MetersListHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class MetersCreateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetersCreateErrors = MetersCreateHTTPValidationError;
-
-/**
- * Meter not found.
- */
-export class MetersGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class MetersGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetersGetErrors = MetersGetResourceNotFoundError | MetersGetHTTPValidationError;
-
-/**
- * Meter not found.
- */
-export class MetersUpdateResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class MetersUpdateHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetersUpdateErrors =
-  | MetersUpdateResourceNotFoundError
-  | MetersUpdateHTTPValidationError;
-
-/**
- * Meter not found.
- */
-export class MetersQuantitiesResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class MetersQuantitiesHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type MetersQuantitiesErrors =
-  | MetersQuantitiesResourceNotFoundError
-  | MetersQuantitiesHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class CustomerMetersListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomerMetersListErrors = CustomerMetersListHTTPValidationError;
-
-/**
- * Customer meter not found.
- */
-export class CustomerMetersGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class CustomerMetersGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type CustomerMetersGetErrors =
-  | CustomerMetersGetResourceNotFoundError
-  | CustomerMetersGetHTTPValidationError;
-
-/**
- * Validation Error
- */
-export class PaymentsListHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type PaymentsListErrors = PaymentsListHTTPValidationError;
-
-/**
- * Payment not found.
- */
-export class PaymentsGetResourceNotFoundError extends Data.TaggedError("ResourceNotFound")<{
-  readonly status: 404;
-  readonly body: Models.ResourceNotFound;
-}> {}
-
-/**
- * Validation Error
- */
-export class PaymentsGetHTTPValidationError extends Data.TaggedError("HTTPValidationError")<{
-  readonly status: 422;
-  readonly body: Models.HTTPValidationError;
-}> {}
-
-export type PaymentsGetErrors = PaymentsGetResourceNotFoundError | PaymentsGetHTTPValidationError;

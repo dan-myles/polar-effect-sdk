@@ -9,4 +9,3 @@ export * as Members from "./members";
 export * as Orders from "./orders";
 export * as Organizations from "./organizations";
 export * as Subscriptions from "./subscriptions";
-export * as Wallets from "./wallets";

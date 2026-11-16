@@ -111,33 +111,6 @@ export const create = (
   });
 
 /**
- * Export subscriptions as a CSV file.
- *
- * **Scopes**: `subscriptions:read` `subscriptions:write`
- */
-const export_ = (query?: {
-  readonly organization_id?: string | ReadonlyArray<string> | null;
-  readonly product_id?: string | ReadonlyArray<string> | null;
-  readonly status?: Models.SubscriptionStatus | ReadonlyArray<Models.SubscriptionStatus> | null;
-  readonly cancel_at_period_end?: boolean | null;
-  readonly started_after?: (DateTime.Utc | string) | null;
-  readonly started_before?: (DateTime.Utc | string) | null;
-  readonly timezone?: string;
-  readonly columns?:
-    | Models.SubscriptionExportColumn
-    | ReadonlyArray<Models.SubscriptionExportColumn>
-    | null;
-}): Effect.Effect<string, Errors.SubscriptionsExportErrors | PolarRequestError, PolarClient> =>
-  request({
-    method: "GET",
-    path: "/v1/subscriptions/export",
-    query,
-    success: "text",
-    errors: { 422: [[Models.HTTPValidationError, Errors.SubscriptionsExportHTTPValidationError]] },
-  });
-export { export_ as export };
-
-/**
  * Get a subscription by ID.
  *
  * **Scopes**: `subscriptions:read` `subscriptions:write`
@@ -210,13 +183,17 @@ export const update = (
     body: [Models.SubscriptionUpdate, body],
     success: Models.Subscription,
     errors: {
-      402: [[Models.PaymentFailed, Errors.SubscriptionsUpdatePaymentFailedError]],
+      402: [
+        [Models.PaymentFailed, Errors.SubscriptionsUpdatePaymentFailedError],
+        [Models.PaymentActionRequired, Errors.SubscriptionsUpdatePaymentActionRequiredError],
+      ],
       403: [
         [
           Models.AlreadyCanceledSubscription,
           Errors.SubscriptionsUpdateAlreadyCanceledSubscriptionError,
         ],
         [Models.InactiveSubscription, Errors.SubscriptionsUpdateInactiveSubscriptionError],
+        [Models.PaymentNotReady, Errors.SubscriptionsUpdatePaymentNotReadyError],
       ],
       404: [[Models.ResourceNotFound, Errors.SubscriptionsUpdateResourceNotFoundError]],
       409: [
