@@ -112,6 +112,7 @@ export const update = (
           Errors.CheckoutsUpdateAlreadyActiveSubscriptionError,
         ],
         [Models.NotOpenCheckout, Errors.CheckoutsUpdateNotOpenCheckoutError],
+        [Models.NotPermitted, Errors.CheckoutsUpdateNotPermittedError],
         [Models.PaymentNotReady, Errors.CheckoutsUpdatePaymentNotReadyError],
         [Models.TrialAlreadyRedeemed, Errors.CheckoutsUpdateTrialAlreadyRedeemedError],
         [
@@ -140,6 +141,7 @@ export const clientGet = (
     pathParams: { client_secret: client_secret },
     success: Models.CheckoutPublic,
     errors: {
+      403: [[Models.NotPermitted, Errors.CheckoutsClientGetNotPermittedError]],
       404: [[Models.ResourceNotFound, Errors.CheckoutsClientGetResourceNotFoundError]],
       410: [[Models.ExpiredCheckoutError, Errors.CheckoutsClientGetExpiredCheckoutError]],
       422: [[Models.HTTPValidationError, Errors.CheckoutsClientGetHTTPValidationError]],
@@ -170,6 +172,7 @@ export const clientUpdate = (
           Errors.CheckoutsClientUpdateAlreadyActiveSubscriptionError,
         ],
         [Models.NotOpenCheckout, Errors.CheckoutsClientUpdateNotOpenCheckoutError],
+        [Models.NotPermitted, Errors.CheckoutsClientUpdateNotPermittedError],
         [Models.PaymentNotReady, Errors.CheckoutsClientUpdatePaymentNotReadyError],
         [Models.TrialAlreadyRedeemed, Errors.CheckoutsClientUpdateTrialAlreadyRedeemedError],
         [
@@ -178,6 +181,7 @@ export const clientUpdate = (
         ],
       ],
       404: [[Models.ResourceNotFound, Errors.CheckoutsClientUpdateResourceNotFoundError]],
+      409: [[Models.CheckoutLocked, Errors.CheckoutsClientUpdateCheckoutLockedError]],
       410: [[Models.ExpiredCheckoutError, Errors.CheckoutsClientUpdateExpiredCheckoutError]],
       422: [[Models.HTTPValidationError, Errors.CheckoutsClientUpdateHTTPValidationError]],
     },
@@ -210,6 +214,7 @@ export const clientConfirm = (
           Errors.CheckoutsClientConfirmAlreadyActiveSubscriptionError,
         ],
         [Models.NotOpenCheckout, Errors.CheckoutsClientConfirmNotOpenCheckoutError],
+        [Models.NotPermitted, Errors.CheckoutsClientConfirmNotPermittedError],
         [Models.PaymentNotReady, Errors.CheckoutsClientConfirmPaymentNotReadyError],
         [Models.TrialAlreadyRedeemed, Errors.CheckoutsClientConfirmTrialAlreadyRedeemedError],
         [
@@ -218,6 +223,7 @@ export const clientConfirm = (
         ],
       ],
       404: [[Models.ResourceNotFound, Errors.CheckoutsClientConfirmResourceNotFoundError]],
+      409: [[Models.CheckoutLocked, Errors.CheckoutsClientConfirmCheckoutLockedError]],
       410: [[Models.ExpiredCheckoutError, Errors.CheckoutsClientConfirmExpiredCheckoutError]],
       422: [[Models.HTTPValidationError, Errors.CheckoutsClientConfirmHTTPValidationError]],
     },

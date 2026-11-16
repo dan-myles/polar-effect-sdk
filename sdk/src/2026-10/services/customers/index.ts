@@ -58,6 +58,8 @@ export const listStream = (query?: {
 /**
  * Create a customer.
  *
+ * Set `external_id` to the customer's ID in your system to look it up by that ID.
+ *
  * **Scopes**: `customers:write`
  */
 export const create = (
@@ -70,23 +72,6 @@ export const create = (
     success: Models.Customer,
     errors: { 422: [[Models.HTTPValidationError, Errors.CustomersCreateHTTPValidationError]] },
   });
-
-/**
- * Export customers as a CSV file.
- *
- * **Scopes**: `customers:read` `customers:write`
- */
-const export_ = (query?: {
-  readonly organization_id?: string | ReadonlyArray<string> | null;
-}): Effect.Effect<string, Errors.CustomersExportErrors | PolarRequestError, PolarClient> =>
-  request({
-    method: "GET",
-    path: "/v1/customers/export",
-    query,
-    success: "text",
-    errors: { 422: [[Models.HTTPValidationError, Errors.CustomersExportHTTPValidationError]] },
-  });
-export { export_ as export };
 
 /**
  * Get a customer by ID.
